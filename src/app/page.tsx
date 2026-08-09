@@ -53,6 +53,15 @@ const features = [
   },
 ];
 
+const ticker = [
+  ["60", "days in the challenge"],
+  ["1", "day shipped on time"],
+  ["13", "days open to catch up"],
+  ["1", "mentor that remembers"],
+  ["3", "certificates to earn"],
+  ["v1.0.0", "graduation release"],
+];
+
 const faqs = [
   "Is purchasing a Claude subscription mandatory for this challenge?",
   "Do I need to create a Claude account?",
@@ -132,29 +141,56 @@ const newFix = [
   "Reviews that say what to fix, not just 'done'",
 ];
 
+const footerCols = [
+  {
+    title: "Challenge",
+    links: [
+      ["Start", "/login"],
+      ["Content", "/content"],
+      ["Certificates", "/certificates"],
+      ["Mentor", "/mentor/general"],
+    ],
+  },
+  {
+    title: "Resources",
+    links: [
+      ["Interview practice", "/interview"],
+      ["Live day", "/day/12"],
+      ["Your challenge", "/dashboard"],
+      ["PROMPTS.md", "https://github.com/kandhwayanushka-hue/abtalks-redesign/blob/master/PROMPTS.md"],
+    ],
+  },
+  {
+    title: "Company",
+    links: [
+      ["Why this exists", "#why"],
+      ["Features", "#features"],
+      ["Memory layer", "#memory"],
+      ["Become an ambassador", "#ambassador"],
+    ],
+  },
+];
+
 export default function Home() {
   return (
     <div className="min-h-screen bg-zinc-950 text-zinc-100">
-      <header className="sticky top-0 z-40 border-b border-white/5 bg-zinc-950/70 backdrop-blur-xl">
-        <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
+      <nav className="fixed left-1/2 top-6 z-50 w-[95%] max-w-[672px] -translate-x-1/2">
+        <div className="glass flex h-14 items-center justify-between rounded-full px-4 sm:px-5">
           <Link href="/" className="flex items-center gap-2">
-            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-violet-500 to-blue-500 font-bold text-white">
+            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-violet-500 to-cyan-500 text-xs font-bold text-white">
               A
             </span>
-            <span className="text-sm font-semibold tracking-tight">
+            <span className="font-serif text-sm tracking-tight">
               ABTalks <span className="text-zinc-500">·</span>{" "}
               <span className="text-gradient">Redesigned</span>
             </span>
           </Link>
-          <nav className="hidden items-center gap-8 text-sm text-zinc-400 md:flex">
+          <nav className="hidden items-center gap-6 text-[11px] uppercase tracking-widest text-zinc-400 md:flex">
             <a href="#why" className="transition hover:text-white">
               Why
             </a>
             <a href="#features" className="transition hover:text-white">
               Features
-            </a>
-            <a href="#memory" className="transition hover:text-white">
-              Memory
             </a>
             <Link href="/content" className="transition hover:text-white">
               Content
@@ -163,18 +199,18 @@ export default function Home() {
               Sign in
             </Link>
           </nav>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2.5">
             <ThemeToggle className="hidden sm:flex" />
             <Link
               href="/dashboard"
-              className="group flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-medium text-zinc-950 transition hover:bg-zinc-200"
+              className="flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-semibold text-zinc-950 transition hover:bg-zinc-200"
             >
-                Open your challenge
-                <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
+              Open your challenge
+              <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
         </div>
-      </header>
+      </nav>
 
       <section className="relative overflow-hidden">
         <div className="glow-grid absolute inset-0" />
@@ -184,7 +220,7 @@ export default function Home() {
             style={{ animationDelay: "0s" }}
           />
           <div
-            className="aurora-blob -top-20 right-[4%] h-[480px] w-[480px] bg-blue-500/40"
+            className="aurora-blob -top-20 right-[4%] h-[480px] w-[480px] bg-cyan-500/40"
             style={{ animationDelay: "-6s" }}
           />
           <div
@@ -192,96 +228,140 @@ export default function Home() {
             style={{ animationDelay: "-12s" }}
           />
           <div
-            className="aurora-blob right-[16%] top-[42%] h-[380px] w-[380px] bg-pink-500/30"
+            className="aurora-blob right-[16%] top-[42%] h-[380px] w-[380px] bg-violet-500/30"
             style={{ animationDelay: "-3s" }}
           />
         </div>
         <div className="pointer-events-none absolute inset-0 hidden lg:block">
-          <div className="float-3d preserve-3d absolute left-[5%] top-[26%] rounded-xl border border-white/10 bg-zinc-900/80 px-4 py-3 backdrop-blur" style={{ animationDelay: "0s" }}>
+          <div className="float-3d preserve-3d glass absolute left-[5%] top-[30%] rounded-xl px-4 py-3">
             <div className="flex items-center gap-2 text-sm">
               <Flame className="h-4 w-4 text-amber-400 [transform:translateZ(30px)]" />
-              <span className="[transform:translateZ(20px)]">Streak 7 · longest 13</span>
+              <span className="font-mono text-[10px] uppercase tracking-widest text-zinc-400 [transform:translateZ(20px)]">
+                Streak 7 · longest 13
+              </span>
             </div>
           </div>
           <div
-            className="float-3d preserve-3d absolute right-[4%] top-[38%] rounded-xl border border-white/10 bg-zinc-900/80 px-4 py-3 backdrop-blur"
+            className="float-3d preserve-3d glass absolute right-[3%] top-[44%] rounded-xl px-4 py-3"
             style={{ animationDelay: "-2s" }}
           >
             <div className="flex items-center gap-2 text-sm">
               <Trophy className="h-4 w-4 text-amber-300 [transform:translateZ(30px)]" />
-              <span className="[transform:translateZ(20px)]">Certificate · Part 1 unlocked</span>
+              <span className="font-mono text-[10px] uppercase tracking-widest text-zinc-400 [transform:translateZ(20px)]">
+                Certificate · Part 1 unlocked
+              </span>
             </div>
           </div>
           <div
-            className="float-3d preserve-3d absolute left-[10%] top-[64%] rounded-xl border border-white/10 bg-zinc-900/80 px-4 py-3 backdrop-blur"
+            className="float-3d preserve-3d glass absolute left-[11%] top-[68%] rounded-xl px-4 py-3"
             style={{ animationDelay: "-4s" }}
           >
             <div className="flex items-center gap-2 text-sm">
               <Rocket className="h-4 w-4 text-emerald-400 [transform:translateZ(30px)]" />
-              <span className="[transform:translateZ(20px)]">v1.0.0 shipped</span>
+              <span className="font-mono text-[10px] uppercase tracking-widest text-zinc-400 [transform:translateZ(20px)]">
+                v1.0.0 shipped
+              </span>
             </div>
           </div>
         </div>
-        <div className="relative mx-auto max-w-6xl px-4 pb-16 pt-24 sm:px-6 sm:pt-32">
+        <div className="relative mx-auto max-w-6xl px-4 pb-20 pt-36 sm:px-6 sm:pt-44">
           <div className="mx-auto max-w-3xl text-center">
-            <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs font-medium text-zinc-300">
+            <span className="stagger inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs font-medium text-zinc-300">
               <Sparkles className="h-3.5 w-3.5 text-violet-400" />
               A redesign of the platform you’re standing on
             </span>
-            <h1 className="mt-6 text-4xl font-semibold leading-[1.05] tracking-tight sm:text-6xl">
+            <h1 className="stagger stagger-1 mt-8 font-serif text-5xl font-normal leading-[0.95] tracking-tight sm:text-7xl lg:text-8xl">
               The challenge platform
               <br />
-              <span className="text-gradient">that remembers you.</span>
+              <span className="shimmer-text">that remembers you.</span>
             </h1>
-            <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-zinc-400">
+            <p className="stagger stagger-2 mx-auto mt-7 max-w-xl text-lg leading-relaxed text-zinc-400">
               ABTalks, reimagined: one task a day, an AI mentor that remembers
               every day you’ve shipped, and a skill path that shows you what you
               actually learned — not just boxes ticked.
             </p>
-            <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
-              <Link
-                href="/login"
-                className="group flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-violet-500 to-blue-500 px-7 py-3.5 text-sm font-semibold text-white transition hover:brightness-110 sm:w-auto"
-              >
-                Start your challenge
-                <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
+            <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+              <Link href="/login" className="shiny-btn group w-full sm:w-auto">
+                <span className="flex w-full items-center justify-center gap-2 px-7 py-3.5 text-sm font-semibold text-white transition group-hover:brightness-125 sm:w-auto">
+                  Start your challenge
+                  <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
+                </span>
               </Link>
               <a
                 href="#features"
-                className="flex w-full items-center justify-center gap-2 rounded-full border border-white/10 bg-white/5 px-7 py-3.5 text-sm font-semibold text-zinc-200 transition hover:bg-white/10 sm:w-auto"
+                className="stagger stagger-3 flex w-full items-center justify-center gap-2 rounded-full px-4 py-3 text-sm font-semibold text-zinc-300 transition hover:text-white sm:w-auto"
               >
                 See what changed
+                <ArrowRight className="h-4 w-4" />
               </a>
             </div>
           </div>
+        </div>
+      </section>
 
-          <div className="mx-auto mt-20 grid max-w-4xl grid-cols-2 gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/10 sm:grid-cols-4">
-            {[
-              ["60", "days in the challenge"],
-              ["1", "day shipped on time"],
-              ["13", "days open to catch up"],
-              ["1", "mentor that remembers"],
-            ].map(([num, label]) => (
-              <div key={label} className="bg-zinc-950 px-6 py-6 text-center">
-                <div className="text-3xl font-semibold tracking-tight text-gradient">{num}</div>
-                <div className="mt-1 text-sm text-zinc-500">{label}</div>
-              </div>
+      <section className="ticker border-y border-white/5 bg-black/40">
+        <div className="ticker-track py-4">
+          {[...ticker, ...ticker].map(([num, label], i) => (
+            <div key={i} className="flex items-center gap-4">
+              <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-zinc-500">
+                {label}
+              </span>
+              <span className="font-mono text-base text-zinc-100">{num}</span>
+              <span className="h-1 w-1 rounded-full bg-violet-500" />
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section id="features" className="border-t border-white/5 py-24">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6">
+          <div className="max-w-2xl">
+            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-violet-400">
+              What actually changed
+            </span>
+            <h2 className="mt-4 font-serif text-4xl tracking-tight sm:text-5xl">
+              Every form became a coach.
+            </h2>
+            <p className="mt-4 text-lg text-zinc-400">
+              Every piece of the old dashboard was a form. Every piece of this
+              one is a coach.
+            </p>
+          </div>
+          <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {features.map((f) => (
+              <TiltCard
+                key={f.title}
+                className="rounded-3xl border border-white/5 bg-white/[0.02] p-8 transition hover:border-violet-500/40 hover:bg-white/[0.04]"
+              >
+                <span className="flex h-12 w-12 items-center justify-center rounded-xl border border-violet-500/20 bg-violet-500/10 [transform:translateZ(24px)]">
+                  <f.icon className="h-6 w-6 text-violet-400 transition group-hover:scale-110 group-hover:rotate-3" />
+                </span>
+                <h3 className="mt-5 font-serif text-xl tracking-tight [transform:translateZ(16px)]">
+                  {f.title}
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed text-zinc-400 [transform:translateZ(12px)]">
+                  {f.body}
+                </p>
+              </TiltCard>
             ))}
           </div>
         </div>
       </section>
 
       <section className="border-t border-white/5">
-        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+        <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
           <div className="text-center">
-            <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
-              How it works — 3 steps to your first streak
+            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-violet-400">
+              How it works
+            </span>
+            <h2 className="mt-4 font-serif text-4xl tracking-tight sm:text-5xl">
+              Three steps to your first streak
             </h2>
-            <p className="mx-auto mt-3 max-w-md text-zinc-400">
+            <p className="mx-auto mt-4 max-w-md text-zinc-400">
               Built for your phone, late at night after college. Ten minutes a day, proof you can show.
             </p>
           </div>
-          <div className="mt-10 grid gap-4 sm:grid-cols-3">
+          <div className="mt-12 grid gap-4 sm:grid-cols-3">
             {[
               {
                 icon: Bolt,
@@ -304,11 +384,11 @@ export default function Home() {
             ].map((s) => (
               <TiltCard
                 key={s.step}
-                className="relative rounded-2xl border border-white/10 bg-white/[0.03] p-6"
+                className="relative rounded-3xl border border-white/5 bg-white/[0.02] p-8"
               >
-                <span className="absolute right-5 top-5 text-3xl font-semibold text-white/5">{s.step}</span>
+                <span className="absolute right-6 top-5 font-serif text-4xl text-white/5">{s.step}</span>
                 <s.icon className="h-6 w-6 text-violet-400 [transform:translateZ(24px)]" />
-                <h3 className="mt-4 font-semibold tracking-tight [transform:translateZ(16px)]">{s.title}</h3>
+                <h3 className="mt-5 font-serif text-xl tracking-tight [transform:translateZ(16px)]">{s.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-zinc-400 [transform:translateZ(12px)]">{s.body}</p>
               </TiltCard>
             ))}
@@ -317,13 +397,13 @@ export default function Home() {
       </section>
 
       <section className="border-t border-white/5">
-        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+        <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div>
-              <span className="text-xs font-semibold uppercase tracking-widest text-violet-400">
+              <span className="text-xs font-semibold uppercase tracking-[0.2em] text-violet-400">
                 The syllabus
               </span>
-              <h2 className="mt-2 text-2xl font-semibold tracking-tight sm:text-3xl">
+              <h2 className="mt-4 font-serif text-4xl tracking-tight sm:text-5xl">
                 60 days, three parts, three certificates
               </h2>
             </div>
@@ -332,21 +412,21 @@ export default function Home() {
               Certificate of Achievement unlocks.
             </p>
           </div>
-          <div className="mt-8 grid gap-4 lg:grid-cols-3">
+          <div className="mt-10 grid gap-4 lg:grid-cols-3">
             {CERTIFICATES.map((c) => (
               <TiltCard
                 key={c.part}
-                className="relative flex flex-col rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition hover:border-violet-500/30"
+                className="relative flex flex-col rounded-3xl border border-white/5 bg-white/[0.02] p-8 transition hover:border-violet-500/40"
               >
                 <Link
                   href={`/challenge/${c.start}`}
                   aria-label={`Open ${c.title} — Days ${c.start} to ${c.end} challenges`}
-                  className="absolute inset-0 z-[1] rounded-2xl"
+                  className="absolute inset-0 z-[1] rounded-3xl"
                 >
                   <span className="sr-only">Open challenges</span>
                 </Link>
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-semibold uppercase tracking-widest text-violet-400">
+                  <span className="text-xs font-semibold uppercase tracking-[0.2em] text-violet-400">
                     Part {c.part}
                   </span>
                   <span className="flex items-center gap-0.5" aria-label={`${c.difficulty} difficulty`}>
@@ -358,7 +438,7 @@ export default function Home() {
                     ))}
                   </span>
                 </div>
-                <h3 className="relative z-[2] mt-3 text-lg font-semibold tracking-tight [transform:translateZ(16px)]">
+                <h3 className="relative z-[2] mt-4 font-serif text-xl tracking-tight [transform:translateZ(16px)]">
                   <Link
                     href={`/challenge/${c.start}`}
                     className="transition group-hover:text-violet-300 group-hover:underline"
@@ -366,19 +446,19 @@ export default function Home() {
                     {c.title}
                   </Link>
                 </h3>
-                <div className="relative z-[2] mt-1 text-sm text-zinc-500">
+                <div className="relative z-[2] mt-1.5 font-mono text-[11px] uppercase tracking-[0.2em] text-zinc-500">
                   Days {c.start}–{c.end} ·{" "}
-                  <span className="text-zinc-300">{c.difficulty} difficulty</span>
+                  <span className="text-zinc-300">{c.difficulty}</span>
                 </div>
                 <p className="relative z-[2] mt-3 text-sm leading-relaxed text-zinc-400">{c.blurb}</p>
-                <div className="relative z-[2] mt-4 flex flex-wrap gap-1.5">
+                <div className="relative z-[2] mt-5 flex flex-wrap gap-1.5">
                   {c.skills.map((sk) => (
-                    <span key={sk} className="rounded-full bg-white/10 px-2.5 py-1 text-xs text-zinc-300">
+                    <span key={sk} className="rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-xs text-zinc-300">
                       {sk}
                     </span>
                   ))}
                 </div>
-                <div className="relative z-[2] mt-auto pt-5">
+                <div className="relative z-[2] mt-auto pt-6">
                   <Link
                     href={`/certificate/${c.part}`}
                     className="flex items-center justify-center gap-2 rounded-xl border border-amber-500/30 bg-amber-500/10 px-4 py-2.5 text-sm font-semibold text-amber-300 transition hover:bg-amber-500/20"
@@ -394,13 +474,13 @@ export default function Home() {
       </section>
 
       <section className="border-t border-white/5">
-        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+        <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div>
-              <span className="text-xs font-semibold uppercase tracking-widest text-violet-400">
+              <span className="text-xs font-semibold uppercase tracking-[0.2em] text-violet-400">
                 The rules
               </span>
-              <h2 className="mt-2 text-2xl font-semibold tracking-tight sm:text-3xl">
+              <h2 className="mt-4 font-serif text-4xl tracking-tight sm:text-5xl">
                 Three rules. That’s the whole challenge.
               </h2>
             </div>
@@ -408,12 +488,12 @@ export default function Home() {
               No sign-up maze, no syllabus. Do this daily and the streak takes care of itself.
             </p>
           </div>
-          <div className="mt-8 grid gap-4 sm:grid-cols-3">
+          <div className="mt-10 grid gap-4 sm:grid-cols-3">
             {rules.map((r) => (
-              <TiltCard key={r.num} className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] p-6">
-                <span className="absolute -right-3 -top-5 text-7xl font-bold text-white/5">{r.num}</span>
-                <span className="text-xs font-semibold text-violet-400">Rule {r.num}</span>
-                <h3 className="mt-2 text-lg font-semibold tracking-tight [transform:translateZ(16px)]">{r.title}</h3>
+              <TiltCard key={r.num} className="relative overflow-hidden rounded-3xl border border-white/5 bg-white/[0.02] p-8">
+                <span className="absolute -right-2 -top-6 font-serif text-7xl text-white/5">{r.num}</span>
+                <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-violet-400">Rule {r.num}</span>
+                <h3 className="mt-3 font-serif text-xl tracking-tight [transform:translateZ(16px)]">{r.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-zinc-400 [transform:translateZ(12px)]">{r.body}</p>
               </TiltCard>
             ))}
@@ -422,63 +502,73 @@ export default function Home() {
       </section>
 
       <section className="border-t border-white/5">
-        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
-          <div className="card-glow rounded-3xl border border-violet-500/25 bg-gradient-to-br from-violet-600/20 via-zinc-900 to-blue-600/10 p-8 text-center sm:p-12">
-            <span className="mx-auto inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs font-medium text-zinc-300">
-              <Rocket className="h-3.5 w-3.5 text-violet-400" />
-              Publicly commit — make it real
-            </span>
-            <h2 className="mx-auto mt-6 max-w-2xl text-3xl font-semibold tracking-tight sm:text-4xl">
-              Telling people is the first streak.
-            </h2>
-            <p className="mx-auto mt-4 max-w-xl text-zinc-400">
-              The most reliable accountability trick in the book: announce it. Share your challenge on
-              LinkedIn, copy your referral code, and tomorrow you’ll feel the difference.
-            </p>
-            <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-              <Link
-                href="/commit"
-                className="group flex w-full items-center justify-center gap-2 rounded-full bg-white px-7 py-3.5 text-sm font-semibold text-zinc-950 transition hover:bg-zinc-200 sm:w-auto"
-              >
-                Commit publicly
-                <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
-              </Link>
-              <button
-                onClick={() => {
-                  navigator.clipboard?.writeText("HET9HA");
-                }}
-                className="flex w-full items-center justify-center gap-2 rounded-full border border-white/10 bg-white/5 px-7 py-3.5 text-sm font-semibold text-zinc-200 transition hover:bg-white/10 sm:w-auto"
-              >
-                Copy referral code · HET9HA
-              </button>
+        <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+          <div className="card-glow relative overflow-hidden rounded-3xl border border-violet-500/25 bg-gradient-to-br from-violet-600/20 via-zinc-900 to-cyan-600/10 p-8 text-center sm:p-12">
+            <div className="aurora-bg">
+              <div className="aurora-blob -right-20 -top-24 h-[300px] w-[300px] bg-violet-600/40" />
+              <div className="aurora-blob -bottom-24 -left-16 h-[300px] w-[300px] bg-cyan-500/30" />
+            </div>
+            <div className="relative">
+              <span className="mx-auto inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs font-medium text-zinc-300">
+                <Rocket className="h-3.5 w-3.5 text-violet-400" />
+                Publicly commit — make it real
+              </span>
+              <h2 className="mx-auto mt-6 max-w-2xl font-serif text-4xl tracking-tight sm:text-5xl">
+                Telling people is the first streak.
+              </h2>
+              <p className="mx-auto mt-4 max-w-xl text-zinc-400">
+                The most reliable accountability trick in the book: announce it. Share your challenge on
+                LinkedIn, copy your referral code, and tomorrow you’ll feel the difference.
+              </p>
+              <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
+                <Link href="/commit" className="shiny-btn group w-full sm:w-auto">
+                  <span className="flex w-full items-center justify-center gap-2 px-7 py-3.5 text-sm font-semibold text-white transition group-hover:brightness-125 sm:w-auto">
+                    Commit publicly
+                    <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
+                  </span>
+                </Link>
+                <button
+                  onClick={() => {
+                    navigator.clipboard?.writeText("HET9HA");
+                  }}
+                  className="flex w-full items-center justify-center gap-2 rounded-full border border-white/10 bg-white/5 px-7 py-3.5 text-sm font-semibold text-zinc-200 transition hover:bg-white/10 sm:w-auto"
+                >
+                  Copy referral code · HET9HA
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       <section className="border-t border-white/5">
-        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+        <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
           <div className="text-center">
-            <span className="text-xs font-semibold uppercase tracking-widest text-violet-400">
+            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-violet-400">
               Students, not statistics
             </span>
-            <h2 className="mt-2 text-2xl font-semibold tracking-tight sm:text-3xl">
+            <h2 className="mt-4 font-serif text-4xl tracking-tight sm:text-5xl">
               What students say after a few weeks
             </h2>
           </div>
-          <div className="mt-10 grid gap-4 md:grid-cols-3">
+          <div className="mt-12 grid gap-4 md:grid-cols-3">
             {testimonials.map((t) => (
-              <figure key={t.name} className="flex flex-col rounded-2xl border border-white/10 bg-white/[0.03] p-6">
-                <blockquote className="flex-1 text-sm leading-relaxed text-zinc-300">“{t.quote}”</blockquote>
-                <figcaption className="mt-5 border-t border-white/5 pt-4">
+              <TiltCard
+                key={t.name}
+                className="flex flex-col rounded-3xl border border-white/5 bg-white/[0.02] p-8"
+              >
+                <blockquote className="flex-1 font-serif text-lg leading-relaxed text-zinc-200 [transform:translateZ(12px)]">
+                  “{t.quote}”
+                </blockquote>
+                <figcaption className="mt-6 border-t border-white/5 pt-4">
                   <div className="text-sm font-semibold">{t.name}</div>
                   <div className="text-xs text-zinc-500">{t.college}</div>
                 </figcaption>
-              </figure>
+              </TiltCard>
             ))}
           </div>
-          <div className="mt-8">
-            <p className="text-center text-xs font-medium uppercase tracking-widest text-zinc-600">
+          <div className="mt-10">
+            <p className="text-center font-mono text-[10px] uppercase tracking-[0.2em] text-zinc-600">
               Students already shipping from
             </p>
             <div className="mt-4 flex flex-wrap justify-center gap-2">
@@ -497,8 +587,8 @@ export default function Home() {
 
       <section id="why" className="mx-auto max-w-6xl px-4 py-24 sm:px-6">
         <div className="grid gap-6 lg:grid-cols-2">
-          <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-8">
-            <span className="text-xs font-semibold uppercase tracking-widest text-red-400">
+          <div className="rounded-3xl border border-white/5 bg-white/[0.02] p-8">
+            <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-red-400">
               Before — the checklist
             </span>
             <ul className="mt-6 space-y-4">
@@ -510,8 +600,8 @@ export default function Home() {
               ))}
             </ul>
           </div>
-          <div className="card-glow rounded-2xl border border-violet-500/20 bg-gradient-to-b from-violet-500/[0.08] to-transparent p-8">
-            <span className="text-xs font-semibold uppercase tracking-widest text-emerald-400">
+          <div className="card-glow rounded-3xl border border-violet-500/20 bg-gradient-to-b from-violet-500/[0.08] to-transparent p-8">
+            <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-emerald-400">
               After — the mentor
             </span>
             <ul className="mt-6 space-y-4">
@@ -526,32 +616,6 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="features" className="border-t border-white/5 py-24">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6">
-          <div className="max-w-2xl">
-            <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
-              What actually changed
-            </h2>
-            <p className="mt-4 text-lg text-zinc-400">
-              Every piece of the old dashboard was a form. Every piece of this
-              one is a coach.
-            </p>
-          </div>
-          <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {features.map((f) => (
-              <TiltCard
-                key={f.title}
-                className="rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition hover:border-violet-500/30 hover:bg-white/[0.05]"
-              >
-                <f.icon className="h-6 w-6 text-violet-400 transition group-hover:scale-110 [transform:translateZ(24px)]" />
-                <h3 className="mt-4 text-lg font-semibold tracking-tight [transform:translateZ(16px)]">{f.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-zinc-400 [transform:translateZ(12px)]">{f.body}</p>
-              </TiltCard>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <section id="memory" className="border-t border-white/5 py-24">
         <div className="mx-auto grid max-w-6xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-2">
           <div>
@@ -559,7 +623,7 @@ export default function Home() {
               <Brain className="h-3.5 w-3.5 text-violet-400" />
               The memory layer
             </span>
-            <h2 className="mt-6 text-3xl font-semibold tracking-tight sm:text-4xl">
+            <h2 className="mt-6 font-serif text-4xl tracking-tight sm:text-5xl">
               Your journey, remembered.
               <br />
               Every session, every day.
@@ -586,50 +650,51 @@ export default function Home() {
             </ul>
             <Link
               href="/dashboard"
-              className="group mt-10 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-violet-500 to-blue-500 px-6 py-3 text-sm font-semibold text-white transition hover:brightness-110"
+              className="group mt-10 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-violet-500 to-cyan-500 px-6 py-3 text-sm font-semibold text-white transition hover:brightness-110"
             >
               Try the mentor
               <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
             </Link>
           </div>
 
-          <div className="card-glow rounded-2xl border border-white/10 bg-zinc-900 p-6">
-            <div className="flex items-center gap-3 border-b border-white/5 pb-4">
-              <span className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-violet-500 to-blue-500 text-xs font-bold text-white">
-                M
+          <div className="code-window overflow-hidden rounded-2xl border border-white/10">
+            <div className="flex items-center justify-between border-b border-white/10 px-4 py-3">
+              <div className="flex gap-1.5">
+                <span className="h-3 w-3 rounded-full bg-red-500/40" />
+                <span className="h-3 w-3 rounded-full bg-yellow-500/40" />
+                <span className="h-3 w-3 rounded-full bg-green-500/40" />
+              </div>
+              <span className="font-mono text-xs text-zinc-500">memory.ts</span>
+              <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-emerald-400">
+                synced
               </span>
-              <div>
-                <div className="text-sm font-semibold">Mentor</div>
-                <div className="flex items-center gap-1.5 text-xs text-emerald-400">
-                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-                  remembers Day 6 → 60
-                </div>
-              </div>
             </div>
-            <div className="space-y-4 pt-4 text-sm leading-relaxed">
-              <div className="rounded-xl bg-zinc-800 px-4 py-3 text-zinc-300">
-                i missed 59 days and gave up. can i still finish?
-              </div>
-              <div className="rounded-xl bg-violet-500/10 px-4 py-3 text-zinc-200">
-                I remember Day 1 went out on time on 5 Jun. The problem wasn’t you — it was a calendar that showed “Missed” 58 times and offered nothing back. I’ve compressed your catch-up into 13 starter steps. Say the word and we start today.
-              </div>
-              <div className="flex items-center gap-2 rounded-xl bg-zinc-800/60 px-4 py-2.5 text-xs text-zinc-500">
-                <Flame className="h-4 w-4 text-amber-400" />
-                Streak 0 · longest 1 · Day 60 · memory 100% synced
-              </div>
-            </div>
+            <pre className="scrollbar-thin overflow-x-auto p-5 font-mono text-sm leading-relaxed">
+              <code>
+                <span className="code-k">const</span> memory = <span className="code-k">await</span>{" "}
+                sync(<span className="code-s">{"\"breeth://mentor\""}</span>);
+                {"\n"}
+                memory.<span className="code-cn">remember</span>({"{"}
+                {"\n  "}day: <span className="code-s">{"\"day-12\""}</span>,{"\n  "}strength:{" "}
+                <span className="code-s">{"\"prompting\""}</span>,{"\n  "}struggle:{" "}
+                <span className="code-s">{"\"deployment\""}</span>,{"\n"}
+                {"}"});
+                {"\n"}
+                <span className="code-c">{"// Day 40 hints now know about Day 8 wins."}</span>
+              </code>
+            </pre>
           </div>
         </div>
       </section>
 
-      <section className="border-t border-white/5 py-24">
+      <section id="ambassador" className="border-t border-white/5 py-24">
         <div className="mx-auto grid max-w-6xl gap-12 px-4 sm:px-6 lg:grid-cols-2">
           <div>
             <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs font-medium text-zinc-300">
               <Users className="h-3.5 w-3.5 text-amber-400" />
               Grow with ABTalks
             </span>
-            <h2 className="mt-6 text-3xl font-semibold tracking-tight sm:text-4xl">
+            <h2 className="mt-6 font-serif text-4xl tracking-tight sm:text-5xl">
               Want to be a campus ambassador for your college?
             </h2>
             <p className="mt-5 text-lg leading-relaxed text-zinc-400">
@@ -638,7 +703,7 @@ export default function Home() {
               track it on your challenge page, and turn every friend you onboard
               into momentum for your own streak.
             </p>
-            <div className="mt-8 flex items-center gap-4">
+            <div className="mt-8 flex flex-wrap items-center gap-4">
               <button className="rounded-full bg-white px-6 py-3 text-sm font-semibold text-zinc-950 transition hover:bg-zinc-200">
                 Become an ambassador
               </button>
@@ -654,7 +719,7 @@ export default function Home() {
           </div>
 
           <div>
-            <h2 className="text-2xl font-semibold tracking-tight">Frequently asked questions</h2>
+            <h2 className="font-serif text-3xl tracking-tight">Frequently asked questions</h2>
             <p className="mt-2 text-zinc-500">The real ones, answered where you already are.</p>
             <div className="mt-6 space-y-2.5">
               {faqs.map((q, i) => (
@@ -680,7 +745,7 @@ export default function Home() {
 
       <section className="border-t border-white/5 py-24">
         <div className="mx-auto max-w-3xl px-4 text-center sm:px-6">
-          <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
+          <h2 className="font-serif text-4xl tracking-tight sm:text-5xl">
             One day left. One task. Graduation.
           </h2>
           <p className="mt-4 text-lg text-zinc-400">
@@ -697,13 +762,53 @@ export default function Home() {
         </div>
       </section>
 
-      <footer className="border-t border-white/5 py-10 pb-28 md:pb-10">
-        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-4 text-sm text-zinc-500 sm:flex-row sm:px-6">
-          <span>ABTalks · Redesigned — a hackathon rebuild, vibe-coded.</span>
-          <span className="flex items-center gap-2">
-            <Flame className="h-4 w-4 text-amber-400" />
-            Built in a weekend, remembered forever
-          </span>
+      <footer className="footer-dark border-t border-white/5">
+        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+          <div className="grid gap-10 md:grid-cols-4">
+            <div>
+              <Link href="/" className="flex items-center gap-2">
+                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-violet-500 to-cyan-500 text-xs font-bold text-white">
+                  A
+                </span>
+                <span className="font-serif text-lg tracking-tight">ABTalks</span>
+              </Link>
+              <p className="mt-4 max-w-xs text-sm leading-relaxed text-zinc-500">
+                A hackathon rebuild, vibe-coded. The challenge platform that
+                remembers you — one task a day, a mentor, a certificate.
+              </p>
+            </div>
+            {footerCols.map((col) => (
+              <div key={col.title}>
+                <h3 className="font-mono text-[10px] uppercase tracking-[0.2em] text-zinc-500">
+                  {col.title}
+                </h3>
+                <ul className="mt-4 space-y-2.5">
+                  {col.links.map(([label, href]) => (
+                    <li key={label}>
+                      <Link
+                        href={href}
+                        className="text-sm text-zinc-400 transition hover:text-white"
+                      >
+                        {label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="border-t border-white/5">
+          <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-4 py-6 text-xs text-zinc-500 sm:flex-row sm:px-6">
+            <span>© 2026 ABTalks · Redesigned</span>
+            <span className="flex items-center gap-2 font-mono uppercase tracking-[0.2em] text-emerald-400">
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
+              </span>
+              All Systems Operational
+            </span>
+          </div>
         </div>
       </footer>
 

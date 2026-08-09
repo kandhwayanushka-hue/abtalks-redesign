@@ -1,7 +1,8 @@
 @import "tailwindcss";
 
 @theme inline {
-  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-instrument-serif), ui-serif, Georgia, serif;
   --font-mono: var(--font-geist-mono), ui-monospace, monospace;
 }
 
@@ -130,6 +131,200 @@ body {
   .float-3d {
     animation: none;
   }
+}
+
+/* ---------- Synapse design system ---------- */
+
+.glass {
+  background: rgba(10, 10, 10, 0.72);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.shimmer-text {
+  background: linear-gradient(90deg, #a78bfa 0%, #ffffff 40%, #ffffff 60%, #22d3ee 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shimmer 4s linear infinite;
+}
+
+@keyframes shimmer {
+  to {
+    background-position: 200% center;
+  }
+}
+
+.shiny-btn {
+  position: relative;
+  border-radius: 9999px;
+  padding: 1px;
+  overflow: hidden;
+}
+
+.shiny-btn::before {
+  content: "";
+  position: absolute;
+  inset: -100%;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0%,
+    #8b5cf6 40%,
+    #06b6d4 50%,
+    transparent 60%
+  );
+  animation: spin-border 4s linear infinite;
+}
+
+@keyframes spin-border {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.shiny-btn > span {
+  position: relative;
+  z-index: 1;
+  display: block;
+  border-radius: 9999px;
+  background: #0a0a0a;
+}
+
+.ticker {
+  overflow: hidden;
+}
+
+.ticker-track {
+  display: flex;
+  gap: 3rem;
+  width: max-content;
+  animation: ticker-scroll 40s linear infinite;
+}
+
+@keyframes ticker-scroll {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.stagger {
+  opacity: 0;
+  animation: rise-in 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+.stagger-1 {
+  animation-delay: 0.1s;
+}
+.stagger-2 {
+  animation-delay: 0.2s;
+}
+.stagger-3 {
+  animation-delay: 0.3s;
+}
+.stagger-4 {
+  animation-delay: 0.4s;
+}
+
+.code-window {
+  background: rgba(8, 8, 8, 0.8);
+}
+
+.code-k {
+  color: #a78bfa;
+}
+.code-cn {
+  color: #22d3ee;
+}
+.code-s {
+  color: #34d399;
+}
+.code-c {
+  color: #a1a1aa;
+  font-style: italic;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shimmer-text,
+  .shiny-btn::before,
+  .ticker-track,
+  .stagger {
+    animation: none;
+  }
+  .stagger {
+    opacity: 1;
+  }
+}
+
+/* Light-mode overrides for Synapse additions */
+
+.light .glass {
+  background: rgba(255, 255, 255, 0.82);
+  border-color: rgba(228, 228, 231, 1);
+}
+
+.light .shimmer-text {
+  background-image: linear-gradient(90deg, #7c3aed 0%, #18181b 40%, #18181b 60%, #0891b2 100%);
+}
+
+.light .shiny-btn > span {
+  background: #ffffff;
+  color: #18181b;
+}
+
+.footer-dark {
+  background-color: #050505;
+}
+.light .footer-dark .text-zinc-100 {
+  color: #f4f4f5 !important;
+}
+.light .footer-dark .text-zinc-200 {
+  color: #e4e4e7 !important;
+}
+.light .footer-dark .text-zinc-300 {
+  color: #d4d4d8 !important;
+}
+.light .footer-dark .text-zinc-400 {
+  color: #a1a1aa !important;
+}
+.light .footer-dark .text-zinc-500 {
+  color: #71717a !important;
+}
+.light .footer-dark .border-white\/5 {
+  border-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+.light .ticker {
+  background: rgba(0, 0, 0, 0.03);
+  border-color: rgba(228, 228, 231, 0.6);
+}
+
+.light .code-window {
+  background: #ffffff;
+}
+.light .code-k {
+  color: #7c3aed;
+}
+.light .code-cn {
+  color: #0891b2;
+}
+.light .code-s {
+  color: #059669;
+}
+.light .code-c {
+  color: #71717a;
 }
 
 @media print {
