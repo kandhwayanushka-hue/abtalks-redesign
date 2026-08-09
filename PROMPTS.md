@@ -1,0 +1,111 @@
+# PROMPTS.md — AI Usage Log
+
+This is an honest log of how this project was built with AI assistance
+during the hackathon (Problem Statement 1 · Redesign ABTalks).
+
+> **How this build worked:** The project was generated from a blank
+> `create-next-app` scaffold and built entirely through conversational
+> prompts with an AI coding agent (opencode). Every feature, component, and
+> fix below was produced by steering the agent with the prompts documented
+> here. No pre-existing codebase was imported — the git history shows the
+> project growing commit by commit within the hackathon window.
+
+---
+
+## 1. Setup & planning
+
+**Prompt:**
+> I'm entering a hackathon with problem statement 1 — redesign ABTalks. I
+> chose this problem. Tell me what changes you can bring and how the Breeth
+> memory layer id is going to be used.
+
+**Result:** Produced the product thesis — *"turn ABTalks from 'track your
+tasks' into 'your AI mentor who knows you'."* This became the entire
+redesign direction: one-task focus, AI mentor, skill journey, feedback
+loop, community showcase, and a persistent memory layer (Breeth-ready).
+
+**Prompt:**
+> Do it then.
+
+**Result:** Scaffolded `abtalks-redesign` with Next.js 16 (App Router) +
+Tailwind v4 + TypeScript.
+
+## 2. GitHub setup
+
+**Prompt:**
+> Make a separate GitHub repo and then push all the files over there.
+
+**Result:** Created a public repo and pushed — required for Stage 1
+eligibility (public + cloneable).
+
+## 3. Landing page (the pitch)
+
+**Prompt:**
+> Build a landing page that sells the redesign: the old ABTalks dashboard
+> is a form, the new one is a mentor. Include a before/after comparison,
+> feature grid, and a section explaining the memory layer.
+
+**Result:** `src/app/page.tsx` — hero, stats, before/after, six features,
+memory explainer with a mock mentor conversation, CTA, footer.
+
+## 4. Dashboard (the core build)
+
+**Prompt:**
+> Build the redesigned dashboard. It needs: a daily task card focused on
+> Day 60 ("Ship v1.0.0 and graduate"), streak + XP stats, a 60-day skill
+> journey grid colored by skill, and a community showcase. Make it
+> mobile-first and dark themed.
+
+**Result:** `src/components/dashboard/Dashboard.tsx` +
+`JourneyPath.tsx`, with data in `src/data/journey.ts` (60 days × skills ×
+status, missed-days support).
+
+## 5. AI Mentor with persistent memory
+
+**Prompt:**
+> Build the AI mentor chat. It must be memory-aware: it remembers the
+> learner's struggle areas, strengths, and past feedback, and personalizes
+> hints. Design the memory layer so it can swap from a local store to
+> Breeth's API/MCP with no other code changes.
+
+**Result:**
+- `src/lib/memory.ts` — typed memory store (profile / history / entries),
+  localStorage-backed for zero-credential deployment, plus a
+  `MemoryProvider` interface and `breethProvider` that activates when
+  `NEXT_PUBLIC_BREETH_URL` is set.
+- `src/lib/mentor.ts` — rule-based mentor engine that reads memory and
+  answers with hints, rubric reviews, and progress checks that reference
+  remembered facts ("you flagged structured output in Week 2…").
+
+## 6. Polish & fixes (iteration loop)
+
+**Prompt:**
+> Run lint and fix every error. Replace unescaped apostrophes, remove
+> unused imports, and stop calling setState synchronously inside effects —
+> use lazy initial state instead.
+
+**Result:** Clean `npm run lint` and a passing `npm run build`.
+
+## 7. Deployment
+
+**Prompt:**
+> Deploy to Vercel and make sure the live URL is reachable.
+
+**Result:** Live at <LIVE_URL> (see README).
+
+---
+
+## How the memory layer maps to the build
+
+| Requirement | Implementation |
+| --- | --- |
+| Persistent memory across sessions | `getProfile()` / `getHistory()` read from storage on load |
+| Mentor personalizes hints | `mentorReply()` reads `profile.struggleAreas` + `strengths` |
+| Feedback is stored | `remember("feedback", …)` logs every review |
+| Swappable to Breeth | `MemoryProvider` interface; `breethProvider` = Breeth HTTP/MCP |
+| Judging-visible AI usage | This file |
+
+## Env vars (optional)
+
+- `NEXT_PUBLIC_BREETH_URL` — set to your Breeth server URL to switch the
+  memory layer from the local demo store to Breeth. No code changes needed.

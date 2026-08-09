@@ -1,69 +1,311 @@
-import Image from "next/image";
+import Link from "next/link";
+import {
+  ArrowRight,
+  Brain,
+  Calendar,
+  CheckCircle,
+  Flame,
+  GitBranch,
+  Message,
+  Rocket,
+  Sparkles,
+  Trophy,
+} from "@/components/icons";
+
+const features = [
+  {
+    icon: Calendar,
+    title: "One task, full focus",
+    body: "No wall of text. Each day is a single card — objective, hint, submit. The rest of the platform gets out of the way.",
+  },
+  {
+    icon: Brain,
+    title: "A mentor that remembers",
+    body: "Persistent memory across all 60 days. It knows what you struggled with in Week 2 and tailors today's hints to match.",
+  },
+  {
+    icon: Rocket,
+    title: "Submit → feedback → polish",
+    body: "Paste your work, get an instant review against the real rubric, fix, re-submit. A loop that teaches, not just grades.",
+  },
+  {
+    icon: Trophy,
+    title: "A skill path, not a checklist",
+    body: "Prompting, tools, agents, deployment — watch your actual skills light up as the 60 days unlock, not just boxes ticked.",
+  },
+  {
+    icon: Message,
+    title: "Community that ships",
+    body: "A gallery of Day-N builds you can vote on. Solo grind, shared momentum. Catching up after a miss is one click away.",
+  },
+  {
+    icon: GitBranch,
+    title: "Graduation that means something",
+    body: "Ship v1.0.0 with a release tag, a live URL, and a PROMPTS.md story. A portfolio you can actually point to.",
+  },
+];
+
+const oldPain = [
+  "A broken countdown you can't trust",
+  "Days of instructions stacked on one page",
+  "Streak shown as a bare number",
+  "No feedback on what you submitted",
+  "A calendar with nothing to learn from it",
+];
+
+const newFix = [
+  "One calm, honest daily card",
+  "A mentor you can ask, on every task",
+  "Streak as flame + XP, with a skill path",
+  "Instant review against the judging rubric",
+  "A journey map that teaches you your progress",
+];
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+    <div className="min-h-screen bg-zinc-950 text-zinc-100">
+      <header className="sticky top-0 z-40 border-b border-white/5 bg-zinc-950/70 backdrop-blur-xl">
+        <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
+          <Link href="/" className="flex items-center gap-2">
+            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-violet-500 to-blue-500 font-bold text-white">
+              A
+            </span>
+            <span className="text-sm font-semibold tracking-tight">
+              ABTalks <span className="text-zinc-500">·</span>{" "}
+              <span className="text-gradient">Redesigned</span>
+            </span>
+          </Link>
+          <nav className="hidden items-center gap-8 text-sm text-zinc-400 md:flex">
+            <a href="#why" className="transition hover:text-white">
+              Why
+            </a>
+            <a href="#features" className="transition hover:text-white">
+              Features
+            </a>
+            <a href="#memory" className="transition hover:text-white">
+              Memory
+            </a>
+          </nav>
+          <Link
+            href="/dashboard"
+            className="group flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-medium text-zinc-950 transition hover:bg-zinc-200"
+          >
+            Open dashboard
+            <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
+          </Link>
+        </div>
+      </header>
+
+      <section className="relative overflow-hidden">
+        <div className="glow-grid absolute inset-0" />
+        <div className="absolute left-1/2 top-0 h-[420px] w-[720px] -translate-x-1/2 rounded-full bg-violet-600/20 blur-[120px]" />
+        <div className="relative mx-auto max-w-6xl px-4 pb-16 pt-24 sm:px-6 sm:pt-32">
+          <div className="mx-auto max-w-3xl text-center">
+            <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs font-medium text-zinc-300">
+              <Sparkles className="h-3.5 w-3.5 text-violet-400" />
+              A redesign of the platform you’re standing on
+            </span>
+            <h1 className="mt-6 text-4xl font-semibold leading-[1.05] tracking-tight sm:text-6xl">
+              The challenge platform
+              <br />
+              <span className="text-gradient">that remembers you.</span>
+            </h1>
+            <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-zinc-400">
+              ABTalks, reimagined: one task a day, an AI mentor that remembers
+              every day you’ve shipped, and a skill path that shows you what you
+              actually learned — not just boxes ticked.
+            </p>
+            <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
+              <Link
+                href="/dashboard"
+                className="group flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-violet-500 to-blue-500 px-7 py-3.5 text-sm font-semibold text-white transition hover:brightness-110 sm:w-auto"
+              >
+                Open the live dashboard
+                <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
+              </Link>
+              <a
+                href="#features"
+                className="flex w-full items-center justify-center gap-2 rounded-full border border-white/10 bg-white/5 px-7 py-3.5 text-sm font-semibold text-zinc-200 transition hover:bg-white/10 sm:w-auto"
+              >
+                See what changed
+              </a>
+            </div>
+          </div>
+
+          <div className="mx-auto mt-20 grid max-w-4xl grid-cols-2 gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/10 sm:grid-cols-4">
+            {[
+              ["60", "days, one path"],
+              ["54", "day current streak"],
+              ["6", "skills to master"],
+              ["1", "task that matters"],
+            ].map(([num, label]) => (
+              <div key={label} className="bg-zinc-950 px-6 py-6 text-center">
+                <div className="text-3xl font-semibold tracking-tight text-gradient">{num}</div>
+                <div className="mt-1 text-sm text-zinc-500">{label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="why" className="mx-auto max-w-6xl px-4 py-24 sm:px-6">
+        <div className="grid gap-6 lg:grid-cols-2">
+          <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-8">
+            <span className="text-xs font-semibold uppercase tracking-widest text-red-400">
+              Before — the checklist
+            </span>
+            <ul className="mt-6 space-y-4">
+              {oldPain.map((p) => (
+                <li key={p} className="flex items-start gap-3 text-zinc-400">
+                  <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-red-400/70" />
+                  {p}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="card-glow rounded-2xl border border-violet-500/20 bg-gradient-to-b from-violet-500/[0.08] to-transparent p-8">
+            <span className="text-xs font-semibold uppercase tracking-widest text-emerald-400">
+              After — the mentor
+            </span>
+            <ul className="mt-6 space-y-4">
+              {newFix.map((p) => (
+                <li key={p} className="flex items-start gap-3 text-zinc-200">
+                  <CheckCircle className="mt-0.5 h-5 w-5 shrink-0 text-emerald-400" />
+                  {p}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="features" className="border-t border-white/5 py-24">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6">
+          <div className="max-w-2xl">
+            <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
+              What actually changed
+            </h2>
+            <p className="mt-4 text-lg text-zinc-400">
+              Every piece of the old dashboard was a form. Every piece of this
+              one is a coach.
+            </p>
+          </div>
+          <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {features.map((f) => (
+              <div
+                key={f.title}
+                className="group rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition hover:border-violet-500/30 hover:bg-white/[0.05]"
+              >
+                <f.icon className="h-6 w-6 text-violet-400 transition group-hover:scale-110" />
+                <h3 className="mt-4 text-lg font-semibold tracking-tight">{f.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-zinc-400">{f.body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="memory" className="border-t border-white/5 py-24">
+        <div className="mx-auto grid max-w-6xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-2">
+          <div>
+            <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs font-medium text-zinc-300">
+              <Brain className="h-3.5 w-3.5 text-violet-400" />
+              The memory layer
+            </span>
+            <h2 className="mt-6 text-3xl font-semibold tracking-tight sm:text-4xl">
+              Your journey, remembered.
+              <br />
+              Every session, every day.
+            </h2>
+            <p className="mt-5 text-lg leading-relaxed text-zinc-400">
+              The mentor doesn’t start fresh each morning. A persistent memory
+              layer stores your struggles, strengths, and feedback across all 60
+              days — so Day 40 hints know about Day 8 wins. The demo runs on a
+              zero-credential local store; swap one provider and it plugs into a
+              real memory server (Breeth-compatible API/MCP), no other code
+              changes.
+            </p>
+            <ul className="mt-8 space-y-4">
+              {[
+                "Remembers weak spots and tunes every hint",
+                "Feedback from reviews is stored, not lost",
+                "Progress reads like a story, not a CSV",
+              ].map((point) => (
+                <li key={point} className="flex items-start gap-3 text-zinc-200">
+                  <CheckCircle className="mt-0.5 h-5 w-5 shrink-0 text-violet-400" />
+                  {point}
+                </li>
+              ))}
+            </ul>
+            <Link
+              href="/dashboard"
+              className="group mt-10 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-violet-500 to-blue-500 px-6 py-3 text-sm font-semibold text-white transition hover:brightness-110"
             >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+              Try the mentor
+              <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
+            </Link>
+          </div>
+
+          <div className="card-glow rounded-2xl border border-white/10 bg-zinc-900 p-6">
+            <div className="flex items-center gap-3 border-b border-white/5 pb-4">
+              <span className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-violet-500 to-blue-500 text-xs font-bold text-white">
+                M
+              </span>
+              <div>
+                <div className="text-sm font-semibold">Mentor</div>
+                <div className="flex items-center gap-1.5 text-xs text-emerald-400">
+                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+                  remembers Day 6 → 60
+                </div>
+              </div>
+            </div>
+            <div className="space-y-4 pt-4 text-sm leading-relaxed">
+              <div className="rounded-xl bg-zinc-800 px-4 py-3 text-zinc-300">
+                still shaky on structured output, any quick trick?
+              </div>
+              <div className="rounded-xl bg-violet-500/10 px-4 py-3 text-zinc-200">
+                Remembered — you flagged that in Week 2. Since then I’ve been
+                tightening structured-output prompts on your builds. Give the
+                model a schema, not adjectives. I’ll apply that to today’s
+                review.
+              </div>
+              <div className="flex items-center gap-2 rounded-xl bg-zinc-800/60 px-4 py-2.5 text-xs text-zinc-500">
+                <Flame className="h-4 w-4 text-amber-400" />
+                Streak 54 · Day 60 · memory 100% synced
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-t border-white/5 py-24">
+        <div className="mx-auto max-w-3xl px-4 text-center sm:px-6">
+          <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
+            One day left. One task. Graduation.
+          </h2>
+          <p className="mt-4 text-lg text-zinc-400">
+            The redesigned dashboard is live — walk in, ask the mentor, ship
+            v1.0.0.
           </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            href="/dashboard"
+            className="group mt-8 inline-flex items-center gap-2 rounded-full bg-white px-7 py-3.5 text-sm font-semibold text-zinc-950 transition hover:bg-zinc-200"
           >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+            Enter the dashboard
+            <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
+          </Link>
         </div>
-      </main>
+      </section>
+
+      <footer className="border-t border-white/5 py-10">
+        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-4 text-sm text-zinc-500 sm:flex-row sm:px-6">
+          <span>ABTalks · Redesigned — a hackathon rebuild, vibe-coded.</span>
+          <span className="flex items-center gap-2">
+            <Flame className="h-4 w-4 text-amber-400" />
+            Built in a weekend, remembered forever
+          </span>
+        </div>
+      </footer>
     </div>
   );
 }
