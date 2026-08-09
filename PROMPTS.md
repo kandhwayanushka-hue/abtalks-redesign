@@ -198,6 +198,37 @@ out-of-scope rule):
 - Landing page wired: header "Sign in" and hero "Start your challenge" →
   `/login`; "Commit publicly" → `/commit`.
 
+## 13. Start-the-challenge + mentor redirects
+
+**Prompt:**
+> There is no feature to start the challenge for that add that and also add
+> the contents like it is added in the original website and do backend also
+> for it if necessary https://www.abtalks.in/challenge/60 … see this page how
+> starting the challenge opens this kind of interface and contents and
+> clicking on the mentors name doesnt redirect anywhere change that
+
+**Result:**
+- **`/challenge/[day]`** — the challenge interface the original site opens
+  when you start a day: challenge meta card (60 Days Challenge · CLAUDE ·
+  IST day · level · minutes), progress bar, numbered "Your task today" steps,
+  a "Done when you can tick all of these" checklist, and skill-appropriate
+  Resources (ABTalks YouTube, official docs, Discord). A sticky bottom bar
+  has the **Start the challenge** button — it POSTs to
+  `/api/start-challenge`, logs a `challenge-started` milestone to memory, then
+  routes into `/day/[day]`. Content lives in `src/lib/challenge.ts`
+  (skill-tuned instructions/acceptance; Day 60 gets a graduation-specific set
+  matching the real "Ship v1.0.0 and Graduate" task).
+- **Backend added**: `POST /api/start-challenge`, `POST /api/submissions`,
+  `GET /api/challenge/[day]` (Next.js route handlers — validate, record
+  `startedAt`/submission ids, serve content as JSON). Client submits
+  best-effort and keeps memory as the source of truth so the demo works
+  offline.
+- **Mentor redirect fixed**: dashboard mentor cards are now `<Link>`s to
+  `/mentor/[id]` — a full-screen live chat page with the mentor's identity
+  (avatar, specialty, online status). `MentorChat` accepts a `mentor` persona
+  and `mentorReply()` greets as that mentor, so "clicking a mentor name"
+  actually redirects somewhere and the replies match the person.
+
 ---
 
 ## How the memory layer maps to the build

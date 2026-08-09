@@ -21,9 +21,12 @@ function pick<T>(arr: T[]): T {
   return arr[Math.floor(Math.random() * arr.length)];
 }
 
-function greeting(profile: LearnerProfile): string {
+function greeting(profile: LearnerProfile, mentor?: { name: string; specialty: string }): string {
   const gap = CURRENT_DAY - 1 - profile.completed;
-  return `Hey ${profile.name} — Day ${CURRENT_DAY}, and you've completed ${profile.completed} of them so far (${gap} behind, but catchable). I remember Day 1 went out on time on 5 Jun. Let's turn that 1 day into a win. What do you need?`;
+  const intro = mentor
+    ? `I’m ${mentor.name} — ${mentor.specialty}. `
+    : "";
+  return `Hey ${profile.name} — ${intro}Day ${CURRENT_DAY}, and you've completed ${profile.completed} of them so far (${gap} behind, but catchable). I remember Day 1 went out on time on 5 Jun. Let's turn that 1 day into a win. What do you need?`;
 }
 
 function hint(profile: LearnerProfile): string {
@@ -69,12 +72,16 @@ function catchUp(): string {
   )}\n\nStart with step 1 today. Every finished step updates your calendar to "On time". I'll log your progress.`;
 }
 
-export function mentorReply(input: string, profile: LearnerProfile): string {
+export function mentorReply(
+  input: string,
+  profile: LearnerProfile,
+  mentor?: { name: string; specialty: string }
+): string {
   const text = input.trim().toLowerCase();
   remember("profile", "interaction", input.slice(0, 240));
   if (text.includes("?")) remember("doubt", `doubt-${Date.now()}`, input.slice(0, 200));
 
-  if (/^(hi|hey|hello|yo|sup)\b/.test(text)) return greeting(profile);
+  if (/^(hi|hey|hello|yo|sup)\b/.test(text)) return greeting(profile, mentor);
   if (text.includes("hint") || text.includes("stuck") || text.includes("help")) return hint(profile);
   if (text.includes("catch") || text.includes("missed") || text.includes("behind") || text.includes("plan"))
     return catchUp();

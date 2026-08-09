@@ -21,7 +21,7 @@ import {
   Trophy,
   Users,
 } from "@/components/icons";
-import { getProfile, remember, updateProfile, type LearnerProfile } from "@/lib/memory";
+import { getProfile, getMemory, remember, updateProfile, type LearnerProfile } from "@/lib/memory";
 import {
   catchUpCount,
   CURRENT_DAY,
@@ -52,6 +52,7 @@ function askMentor(text: string) {
 export default function Dashboard() {
   const [profile, setProfile] = useState<LearnerProfile | null>(() => getProfile());
   const [completedToday, setCompletedToday] = useState(false);
+  const [started] = useState(() => getMemory().some((e) => e.kind === "milestone" && e.key === "challenge-started"));
 
   const today = JOURNEY.find((d) => d.day === CURRENT_DAY)!;
 
@@ -161,6 +162,30 @@ export default function Dashboard() {
           ))}
         </div>
 
+        {!started && (
+          <div className="mt-6 flex flex-col items-start justify-between gap-4 rounded-2xl border border-violet-500/30 bg-gradient-to-r from-violet-600/20 via-zinc-900 to-blue-600/10 p-5 sm:flex-row sm:items-center">
+            <div className="flex items-start gap-3">
+              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-violet-500/15">
+                <Rocket className="h-5 w-5 text-violet-400" />
+              </span>
+              <div>
+                <h3 className="font-semibold">Your 60 days are waiting</h3>
+                <p className="mt-0.5 text-sm text-zinc-400">
+                  One task a day, a mentor that remembers, and a public streak. Open the challenge page and hit{" "}
+                  <span className="text-violet-300">Start the challenge</span>.
+                </p>
+              </div>
+            </div>
+            <Link
+              href="/challenge/60"
+              className="group flex shrink-0 items-center gap-2 rounded-full bg-gradient-to-r from-violet-500 to-blue-500 px-5 py-2.5 text-sm font-semibold text-white transition hover:brightness-110"
+            >
+              Start the challenge
+              <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
+            </Link>
+          </div>
+        )}
+
         <div className="mt-6 flex flex-col items-start justify-between gap-4 rounded-2xl border border-amber-500/20 bg-gradient-to-r from-amber-500/[0.08] to-violet-500/[0.05] p-5 sm:flex-row sm:items-center">
           <div className="flex items-start gap-3">
             <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-amber-500/15">
@@ -195,9 +220,9 @@ export default function Dashboard() {
           </div>
           <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {LIVE_MENTORS.map((m) => (
-              <button
+              <Link
                 key={m.id}
-                onClick={() => askMentor(m.prompt)}
+                href={`/mentor/${m.id}`}
                 className="group rounded-2xl border border-white/10 bg-white/[0.03] p-4 text-left transition hover:border-violet-500/30 hover:bg-white/[0.05]"
               >
                 <div className="flex items-center gap-3">
@@ -221,7 +246,7 @@ export default function Dashboard() {
                 <div className="mt-3 flex items-center gap-1 text-xs font-medium text-violet-400 opacity-0 transition group-hover:opacity-100">
                   Start live chat <ArrowRight className="h-3 w-3" />
                 </div>
-              </button>
+              </Link>
             ))}
           </div>
         </section>

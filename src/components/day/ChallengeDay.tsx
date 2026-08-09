@@ -42,7 +42,7 @@ export default function ChallengeDay({ day, totalDays }: { day: number; totalDay
   const isMissed = day < totalDays && day !== 1;
   const isToday = day === totalDays;
 
-  function handleSubmit() {
+  async function handleSubmit() {
     setError("");
     const g = github.trim();
     const l = linkedin.trim();
@@ -52,6 +52,15 @@ export default function ChallengeDay({ day, totalDays }: { day: number; totalDay
     }
     const sub = { day, github: g, linkedin: l, note: note.trim(), ts: Date.now() };
     saveSubmission(sub);
+    try {
+      await fetch("/api/submissions", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(sub),
+      });
+    } catch {
+      /* offline — submission is already saved to memory */
+    }
     remember("submission", `day-${day}`, `github:${g || "none"} linkedin:${l || "none"}`);
     remember("milestone", `day-${day}-submitted`, `Submitted on ${new Date().toISOString()}`);
     setSubmitted(sub);

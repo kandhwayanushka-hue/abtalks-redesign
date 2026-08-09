@@ -4,10 +4,11 @@ import { useEffect, useRef, useState } from "react";
 import { Brain, Send, Sparkles } from "@/components/icons";
 import { getHistory, getProfile, pushMessage, type MentorMessage } from "@/lib/memory";
 import { mentorReply } from "@/lib/mentor";
+import type { Mentor } from "@/lib/mentors";
 
 const SUGGESTIONS = ["Give me a hint for today", "Review my submission", "Where am I?"];
 
-export default function MentorChat() {
+export default function MentorChat({ mentor }: { mentor?: Mentor }) {
   const [history, setHistory] = useState<MentorMessage[]>(() => getHistory());
   const [input, setInput] = useState("");
   const [thinking, setThinking] = useState(false);
@@ -43,7 +44,11 @@ export default function MentorChat() {
     setThinking(true);
     window.setTimeout(() => {
       const profile = getProfile();
-      const reply = mentorReply(trimmed, profile);
+      const reply = mentorReply(
+        trimmed,
+        profile,
+        mentor ? { name: mentor.name, specialty: mentor.specialty } : undefined
+      );
       const replyMsg: MentorMessage = { role: "assistant", content: reply, ts: Date.now() };
       setHistory([...next, replyMsg]);
       pushMessage(replyMsg);
@@ -61,12 +66,19 @@ export default function MentorChat() {
     <div className="flex h-full flex-col overflow-hidden rounded-2xl border border-white/10 bg-zinc-900/70">
       <div className="flex items-center justify-between border-b border-white/5 px-5 py-4">
         <div className="flex items-center gap-3">
-          <span className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-violet-500 to-blue-500">
-            <Brain className="h-5 w-5 text-white" />
+          <span
+            className="flex h-9 w-9 items-center justify-center rounded-full text-sm font-bold text-white"
+            style={
+              mentor
+                ? { background: `linear-gradient(135deg, ${mentor.color}, ${mentor.color}88)` }
+                : undefined
+            }
+          >
+            {mentor ? mentor.name[0] : <Brain className="h-5 w-5" />}
           </span>
           <div>
             <div className="flex items-center gap-2 text-sm font-semibold">
-              Live mentor · doubt solving
+              {mentor ? mentor.name : "Live mentor · doubt solving"}
               <Sparkles className="h-3.5 w-3.5 text-violet-400" />
             </div>
             <div className="flex items-center gap-1.5 text-xs text-zinc-500">
@@ -74,7 +86,7 @@ export default function MentorChat() {
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
               </span>
-              online · remembers all 60 days
+              {mentor ? mentor.specialty : "online · remembers all 60 days"}
             </div>
           </div>
         </div>

@@ -139,7 +139,7 @@ export default function CommitPage() {
 
         <div className="mt-8 flex flex-col gap-3 sm:flex-row">
           <Link
-            href={`/day/1`}
+            href={`/challenge/1`}
             className="group flex flex-1 items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-violet-500 to-blue-500 px-6 py-3.5 text-sm font-semibold text-white transition hover:brightness-110"
           >
             Start Day 1

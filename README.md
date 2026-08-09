@@ -30,6 +30,20 @@ Bonus flow screens (mocked — auth is out of scope for this build):
 - `/login` — "Continue with Google" sign-in screen (mock, routes into the dashboard)
 - `/commit` — Public-commit confirmation page: your promise, LinkedIn share,
   referral code, and "Start Day 1"
+- `/challenge/60` (any `/challenge/[day]`) — the challenge interface you get
+  when you start: task steps, "done when" checklist, resources, and a
+  "Start the challenge" button that logs the start to memory and opens the day
+- `/mentor/[id]` — a live mentor chat page; tapping a mentor name on the
+  dashboard now redirects here
+
+## Backend (lightweight, real endpoints)
+
+- `POST /api/start-challenge` — validates the day, records `startedAt`
+- `POST /api/submissions` — validates proof-of-work links, returns a record id
+- `GET /api/challenge/[day]` — serves a day's challenge content as JSON
+
+Client calls the endpoints best-effort and persists the source of truth in the
+memory layer, so the demo keeps working offline too.
 
 ## Edge cases handled
 
@@ -66,6 +80,13 @@ Bonus flow screens (mocked — auth is out of scope for this build):
 - **A real commitment flow** — "Continue with Google" sign-in, then a public
   commitment confirmation page (promise, LinkedIn share, referral code) before
   Day 1 starts — the accountability loop #100DaysOfCode is built on.
+- **A real "start the challenge"** — the original site opens a challenge
+  interface when you start; this rebuild does the same at `/challenge/[day]`
+  (task steps, "done when" checklist, resources), and the Start button logs
+  the commitment to memory before opening the day.
+- **Mentors you can click** — tapping a mentor on the dashboard opens a
+  dedicated live-chat page (`/mentor/[id]`) where replies are tailored to that
+  mentor's specialty.
 
 ## Memory layer (Breeth-ready)
 
