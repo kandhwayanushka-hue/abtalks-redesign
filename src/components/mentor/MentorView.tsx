@@ -5,6 +5,7 @@ import Link from "next/link";
 import MentorChat from "@/components/dashboard/MentorChat";
 import { MobileNav } from "@/components/day/ChallengeDay";
 import { ArrowLeft, ArrowRight, Users } from "@/components/icons";
+import ThemeToggle from "@/components/ThemeToggle";
 import { getMemory, remember } from "@/lib/memory";
 import { LIVE_MENTORS, type Mentor } from "@/lib/mentors";
 
@@ -39,13 +40,16 @@ export default function MentorView({ mentor }: { mentor: Mentor }) {
               </span>
             </Link>
           </div>
-          <span className="flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-medium text-zinc-300">
-            <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
+          <div className="flex items-center gap-2">
+            <ThemeToggle />
+            <span className="flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-medium text-zinc-300">
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
+              </span>
+              {online ? "online now" : "away"}
             </span>
-            {online ? "online now" : "away"}
-          </span>
+          </div>
         </div>
       </header>
 

@@ -262,6 +262,30 @@ out-of-scope rule):
   "Content" / "Certificates" to the landing header nav, the dashboard nav, and
   the bottom MobileNav.
 
+## 15. Live interviewer + day/night mode
+
+**Prompt:**
+> someone has made this … add any feature … someone has added the live
+> interviewer feature also if possible add that and also add that night mode
+> and day mode changing
+
+**Result:**
+- **Live interviewer** (`/interview`) — a mock live interview for the career /
+  portfolio stage. Pick a track (Prompting & Agents, Deployment & Shipping,
+  Portfolio & Career, General), a recruiter persona asks four questions one at
+  a time, answers are scored 1–5 with instant feedback, and the session ends
+  with a verdict + per-question scores. Engine in `src/lib/interviewer.ts`
+  (keyword + length scoring); results are logged to memory
+  (`remember("skill", "interview", …)`) so the mentor can reference them.
+  Entry points: dashboard nav item + an "Interview practice" CTA card.
+- **Day / night mode** — a `ThemeToggle` (sun/moon) in the headers of the
+  landing, dashboard, day, challenge, and mentor screens. The choice is
+  persisted to `localStorage` and applied via a `.light` class on `<html>`
+  (set before paint by an inline script in `layout.tsx` to avoid flash).
+  Because the app was built dark-first with zinc utilities, light mode remaps
+  those surfaces/text/borders through `.light` overrides in `globals.css` so
+  every screen inherits a readable day theme without per-component rewrites.
+
 ---
 
 ## How the memory layer maps to the build

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { MobileNav } from "@/components/day/ChallengeDay";
+import ThemeToggle from "@/components/ThemeToggle";
 import { CERTIFICATES } from "@/data/certificates";
 import {
   ArrowRight,
@@ -161,13 +162,16 @@ export default function Home() {
               Sign in
             </Link>
           </nav>
-          <Link
-            href="/dashboard"
-            className="group flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-medium text-zinc-950 transition hover:bg-zinc-200"
-          >
+          <div className="flex items-center gap-3">
+            <ThemeToggle className="hidden sm:flex" />
+            <Link
+              href="/dashboard"
+              className="group flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-medium text-zinc-950 transition hover:bg-zinc-200"
+            >
                 Open your challenge
                 <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
-          </Link>
+            </Link>
+          </div>
         </div>
       </header>
 

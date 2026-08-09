@@ -19,6 +19,7 @@ import {
   Trophy,
 } from "@/components/icons";
 import { getProfile, getSubmission, remember, saveSubmission } from "@/lib/memory";
+import ThemeToggle from "@/components/ThemeToggle";
 
 function Linkedin(props: React.SVGProps<SVGSVGElement>) {
   return (
@@ -99,9 +100,12 @@ export default function ChallengeDay({ day, totalDays }: { day: number; totalDay
               </span>
             </Link>
           </div>
-          <div className="flex items-center gap-1.5 rounded-full bg-amber-500/10 px-3 py-1.5 text-sm font-semibold text-amber-400">
-            <Flame className="h-4 w-4" />
-            {profile.streak} · max {profile.longestStreak}
+          <div className="flex items-center gap-2">
+            <ThemeToggle />
+            <div className="flex items-center gap-1.5 rounded-full bg-amber-500/10 px-3 py-1.5 text-sm font-semibold text-amber-400">
+              <Flame className="h-4 w-4" />
+              {profile.streak} · max {profile.longestStreak}
+            </div>
           </div>
         </div>
       </header>

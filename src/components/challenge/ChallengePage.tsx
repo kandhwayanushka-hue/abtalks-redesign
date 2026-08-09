@@ -7,6 +7,7 @@ import { CURRENT_DAY, JOURNEY, skillColor } from "@/data/journey";
 import { getChallengeContent, type ChallengeResource } from "@/lib/challenge";
 import { getMemory, getProfile, remember } from "@/lib/memory";
 import DaySwitcher from "@/components/content/DaySwitcher";
+import ThemeToggle from "@/components/ThemeToggle";
 import {
   ArrowLeft,
   ArrowRight,
@@ -79,9 +80,12 @@ export default function ChallengePage({ day }: { day: number }) {
               </span>
             </Link>
           </div>
-          <div className="flex items-center gap-1.5 rounded-full bg-amber-500/10 px-3 py-1.5 text-sm font-semibold text-amber-400">
-            <Flame className="h-4 w-4" />
-            {profile.streak} · max {profile.longestStreak}
+          <div className="flex items-center gap-2">
+            <ThemeToggle />
+            <div className="flex items-center gap-1.5 rounded-full bg-amber-500/10 px-3 py-1.5 text-sm font-semibold text-amber-400">
+              <Flame className="h-4 w-4" />
+              {profile.streak} · max {profile.longestStreak}
+            </div>
           </div>
         </div>
       </header>

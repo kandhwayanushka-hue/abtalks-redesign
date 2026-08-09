@@ -39,12 +39,18 @@ Bonus flow screens (mocked — auth is out of scope for this build):
   difficulty, with a day-switcher to open any day's content
 - `/certificates` — your three certificates of achievement (one per 20-day part)
 - `/certificate/[part]` — a printable Certificate of Achievement (print/PDF)
+- `/interview` — a live mock interviewer: pick a track, answer four questions,
+  get instant per-answer scoring + a verdict, all logged to memory
 
 ## Design detail
 
 - The landing hero uses an animated aurora background (soft violet / blue /
   emerald / pink gradient blobs drifting slowly, plus the subtle grid) in the
   style of devchallenges.io — see `globals.css` (`.aurora-bg`, `.aurora-blob`).
+- **Day / night mode** — a sun/moon toggle in the headers switches between the
+  default dark theme and a light theme (`.light` class on `<html>`, persisted
+  to `localStorage`, no-flash init script in the layout). Light mode remaps the
+  zinc surface/text utilities in `globals.css` so every screen reads cleanly.
 
 ## Syllabus & certificates
 

@@ -7,10 +7,12 @@ import JourneyPath from "./JourneyPath";
 import TaskView from "./TaskView";
 import Standing from "./Standing";
 import { MobileNav } from "@/components/day/ChallengeDay";
+import ThemeToggle from "@/components/ThemeToggle";
 import { LIVE_MENTORS } from "@/lib/mentors";
 import {
   ArrowRight,
   Bolt,
+  Brain,
   Check,
   CheckCircle,
   Flame,
@@ -36,6 +38,7 @@ const navItems = [
   { label: "Journey", href: "#journey" },
   { label: "Mentor", href: "#mentor" },
   { label: "Community", href: "#community" },
+  { label: "Interview", href: "/interview" },
   { label: "Content", href: "/content" },
   { label: "Certificates", href: "/certificates" },
 ];
@@ -103,6 +106,7 @@ export default function Dashboard() {
             ))}
           </nav>
           <div className="flex items-center gap-3">
+            <ThemeToggle />
             <div className="flex items-center gap-1.5 rounded-full bg-amber-500/10 px-3 py-1.5 text-sm font-semibold text-amber-400">
               <Flame className="h-4 w-4" />
               {profile.streak} · max {profile.longestStreak}
@@ -252,6 +256,28 @@ export default function Dashboard() {
             ))}
           </div>
         </section>
+
+        <div className="mt-6 flex flex-col items-start justify-between gap-4 rounded-2xl border border-violet-500/25 bg-gradient-to-r from-violet-600/15 to-blue-600/10 p-5 sm:flex-row sm:items-center">
+          <div className="flex items-start gap-3">
+            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-violet-500/15">
+              <Brain className="h-5 w-5 text-violet-400" />
+            </span>
+            <div>
+              <h3 className="font-semibold">Interview practice · live interviewer</h3>
+              <p className="mt-0.5 text-sm text-zinc-400">
+                Four questions, instant scoring, feedback logged to memory. Be ready when a recruiter
+                asks about your work.
+              </p>
+            </div>
+          </div>
+          <Link
+            href="/interview"
+            className="group flex shrink-0 items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-zinc-950 transition hover:bg-zinc-200"
+          >
+            Start an interview
+            <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
+          </Link>
+        </div>
 
         <div className="mt-6 grid gap-6 lg:grid-cols-3">
           <div className="space-y-6 lg:col-span-2">
