@@ -10,6 +10,7 @@ import {
   Rocket,
   Sparkles,
   Trophy,
+  Users,
 } from "@/components/icons";
 
 const features = [
@@ -45,20 +46,33 @@ const features = [
   },
 ];
 
+const faqs = [
+  "Is purchasing a Claude subscription mandatory for this challenge?",
+  "Do I need to create a Claude account?",
+  "Where can I find the daily task?",
+  "Will I receive daily tasks or teaching sessions?",
+  "What if I miss a day's task?",
+  "Will I receive goodies after completing the challenge?",
+  "Who should I contact if I have an issue with a task?",
+  "Is there any YouTube channel for the Claude Challenge?",
+  "Will we explore different AI tools during the challenge?",
+  "Can I use tools other than Claude for the challenge?",
+];
+
 const oldPain = [
-  "A broken countdown you can't trust",
-  "Days of instructions stacked on one page",
-  "Streak shown as a bare number",
-  "No feedback on what you submitted",
-  "A calendar with nothing to learn from it",
+  "A countdown that read '88 days' and never moved",
+  "59 missed days with no way back in",
+  "A calendar that shows misses but offers no plan",
+  "A streak shown as a bare number",
+  "No feedback on the one thing you submitted",
 ];
 
 const newFix = [
-  "One calm, honest daily card",
-  "A mentor you can ask, on every task",
-  "Streak as flame + XP, with a skill path",
-  "Instant review against the judging rubric",
+  "One calm daily card — what to do, today",
+  "A catch-up plan that turns misses into a sprint",
   "A journey map that teaches you your progress",
+  "Streak as momentum, plus a mentor that nudges",
+  "Reviews that say what to fix, not just 'done'",
 ];
 
 export default function Home() {
@@ -134,10 +148,10 @@ export default function Home() {
 
           <div className="mx-auto mt-20 grid max-w-4xl grid-cols-2 gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/10 sm:grid-cols-4">
             {[
-              ["60", "days, one path"],
-              ["54", "day current streak"],
-              ["6", "skills to master"],
-              ["1", "task that matters"],
+              ["60", "days in the challenge"],
+              ["1", "day shipped on time"],
+              ["13", "days open to catch up"],
+              ["1", "mentor that remembers"],
             ].map(([num, label]) => (
               <div key={label} className="bg-zinc-950 px-6 py-6 text-center">
                 <div className="text-3xl font-semibold tracking-tight text-gradient">{num}</div>
@@ -261,18 +275,71 @@ export default function Home() {
             </div>
             <div className="space-y-4 pt-4 text-sm leading-relaxed">
               <div className="rounded-xl bg-zinc-800 px-4 py-3 text-zinc-300">
-                still shaky on structured output, any quick trick?
+                i missed 59 days and gave up. can i still finish?
               </div>
               <div className="rounded-xl bg-violet-500/10 px-4 py-3 text-zinc-200">
-                Remembered — you flagged that in Week 2. Since then I’ve been
-                tightening structured-output prompts on your builds. Give the
-                model a schema, not adjectives. I’ll apply that to today’s
-                review.
+                I remember Day 1 went out on time on 5 Jun. The problem wasn’t you — it was a calendar that showed “Missed” 58 times and offered nothing back. I’ve compressed your catch-up into 13 starter steps. Say the word and we start today.
               </div>
               <div className="flex items-center gap-2 rounded-xl bg-zinc-800/60 px-4 py-2.5 text-xs text-zinc-500">
                 <Flame className="h-4 w-4 text-amber-400" />
-                Streak 54 · Day 60 · memory 100% synced
+                Streak 0 · longest 1 · Day 60 · memory 100% synced
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-t border-white/5 py-24">
+        <div className="mx-auto grid max-w-6xl gap-12 px-4 sm:px-6 lg:grid-cols-2">
+          <div>
+            <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs font-medium text-zinc-300">
+              <Users className="h-3.5 w-3.5 text-amber-400" />
+              Grow with ABTalks
+            </span>
+            <h2 className="mt-6 text-3xl font-semibold tracking-tight sm:text-4xl">
+              Want to be a campus ambassador for your college?
+            </h2>
+            <p className="mt-5 text-lg leading-relaxed text-zinc-400">
+              Lead your campus on ABTalks, earn perks, and help build the AI
+              community around you. Bring people in with your referral code,
+              track it on your dashboard, and turn every friend you onboard
+              into momentum for your own streak.
+            </p>
+            <div className="mt-8 flex items-center gap-4">
+              <button className="rounded-full bg-white px-6 py-3 text-sm font-semibold text-zinc-950 transition hover:bg-zinc-200">
+                Become an ambassador
+              </button>
+              <a
+                href="https://www.youtube.com/results?search_query=ABTalks+on+AI"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-full border border-white/10 bg-white/5 px-6 py-3 text-sm font-semibold text-zinc-200 transition hover:bg-white/10"
+              >
+                Watch ABTalks on AI
+              </a>
+            </div>
+          </div>
+
+          <div>
+            <h2 className="text-2xl font-semibold tracking-tight">Frequently asked questions</h2>
+            <p className="mt-2 text-zinc-500">The real ones, answered where you already are.</p>
+            <div className="mt-6 space-y-2.5">
+              {faqs.map((q, i) => (
+                <details
+                  key={q}
+                  className="group rounded-2xl border border-white/10 bg-white/[0.03] px-5 py-4 transition hover:border-violet-500/30"
+                >
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-3 text-sm font-medium text-zinc-200">
+                    {q}
+                    <span className="text-zinc-500 transition group-open:rotate-45">＋</span>
+                  </summary>
+                  <p className="mt-3 text-sm leading-relaxed text-zinc-500">
+                    {i % 2 === 0
+                      ? "Ask your mentor — it remembers your challenge and can answer in context. For anything account-related, the WhatsApp community and support are one tap away from the dashboard."
+                      : "Not automatically. Your mentor tailors the answer to your day, your streak, and where you are in the journey — and it’s logged to memory so you never re-ask the same thing twice."}
+                  </p>
+                </details>
+              ))}
             </div>
           </div>
         </div>

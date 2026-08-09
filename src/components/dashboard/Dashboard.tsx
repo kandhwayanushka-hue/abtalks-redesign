@@ -4,12 +4,15 @@ import { useState } from "react";
 import Link from "next/link";
 import MentorChat from "./MentorChat";
 import JourneyPath from "./JourneyPath";
+import TaskView from "./TaskView";
+import { LIVE_MENTORS } from "@/lib/mentors";
 import {
   ArrowRight,
   Bolt,
   Check,
   CheckCircle,
   Flame,
+  MapPin,
   Message,
   Rocket,
   Sparkles,
@@ -17,7 +20,14 @@ import {
   Users,
 } from "@/components/icons";
 import { getProfile, remember, updateProfile, type LearnerProfile } from "@/lib/memory";
-import { CURRENT_DAY, JOURNEY, XP_TOTAL } from "@/data/journey";
+import {
+  catchUpCount,
+  CURRENT_DAY,
+  JOURNEY,
+  LONGEST_STREAK,
+  RECENT_SUBMISSIONS,
+  REFERRAL_CODE,
+} from "@/data/journey";
 
 const navItems = [
   { label: "Today", active: true },
@@ -52,9 +62,11 @@ export default function Dashboard() {
     setCompletedToday(true);
   }
 
-  if (!profile) return null;
+  function askCatchUp() {
+    askMentor("I missed a lot of days. Give me a catch-up plan.");
+  }
 
-  const xpPct = Math.min(100, Math.round(((profile.completed / CURRENT_DAY) * XP_TOTAL * 0.4) / 50) * 5);
+  if (!profile) return null;
 
   return (
     <div className="min-h-screen bg-zinc-950 text-zinc-100">
@@ -85,7 +97,7 @@ export default function Dashboard() {
           <div className="flex items-center gap-3">
             <div className="flex items-center gap-1.5 rounded-full bg-amber-500/10 px-3 py-1.5 text-sm font-semibold text-amber-400">
               <Flame className="h-4 w-4" />
-              {profile.streak}
+              {profile.streak} · max {profile.longestStreak}
             </div>
             <div className="flex items-center gap-2.5">
               <div className="hidden text-right sm:block">
@@ -109,7 +121,7 @@ export default function Dashboard() {
             <p className="mt-1 text-zinc-500">
               {completedToday
                 ? "Day 60 complete — v1.0.0 shipped and logged to memory."
-                : "One task left to graduate. Your mentor is ready."}
+                : `${profile.completed} of ${CURRENT_DAY} days done · ${catchUpCount} days open for catch-up · your mentor is ready.`}
             </p>
           </div>
           <div className="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-zinc-300">
@@ -120,10 +132,10 @@ export default function Dashboard() {
 
         <div className="mt-6 grid grid-cols-2 gap-3 lg:grid-cols-4">
           {[
-            { icon: Flame, label: "Current streak", value: `${profile.streak} days`, tone: "text-amber-400" },
+            { icon: Flame, label: "Current streak", value: `${profile.streak} days · longest ${LONGEST_STREAK}`, tone: "text-amber-400" },
             { icon: CheckCircle, label: "Days completed", value: `${profile.completed} / 60`, tone: "text-emerald-400" },
-            { icon: Users, label: "Referrals", value: "4 · code HET9HA", tone: "text-blue-400" },
-            { icon: Bolt, label: "XP · Level 9", value: `${Math.round((profile.completed / CURRENT_DAY) * 100)}%`, tone: "text-violet-400" },
+            { icon: Users, label: "Referrals", value: `${profile.referrals} · code ${REFERRAL_CODE}`, tone: "text-blue-400" },
+            { icon: Bolt, label: "Catch up open", value: `${catchUpCount} days`, tone: "text-violet-400" },
           ].map((s) => (
             <div key={s.label} className="rounded-2xl border border-white/10 bg-white/[0.03] px-5 py-4">
               <div className="flex items-center gap-2 text-zinc-500">
@@ -135,6 +147,71 @@ export default function Dashboard() {
           ))}
         </div>
 
+        <div className="mt-6 flex flex-col items-start justify-between gap-4 rounded-2xl border border-amber-500/20 bg-gradient-to-r from-amber-500/[0.08] to-violet-500/[0.05] p-5 sm:flex-row sm:items-center">
+          <div className="flex items-start gap-3">
+            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-amber-500/15">
+              <MapPin className="h-5 w-5 text-amber-400" />
+            </span>
+            <div>
+              <h3 className="font-semibold">Want to be a campus ambassador for your college?</h3>
+              <p className="mt-0.5 text-sm text-zinc-400">
+                Lead your campus on ABTalks, earn perks, and grow the AI community. Share your code{" "}
+                <span className="rounded bg-white/10 px-1.5 py-0.5 font-mono text-xs text-amber-300">{REFERRAL_CODE}</span>.
+              </p>
+            </div>
+          </div>
+          <button className="shrink-0 rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-zinc-950 transition hover:bg-zinc-200">
+            Become an ambassador
+          </button>
+        </div>
+
+        <section className="mt-6">
+          <div className="flex items-center justify-between">
+            <div>
+              <h2 className="text-lg font-semibold tracking-tight">Doubt solving · live mentors</h2>
+              <p className="text-sm text-zinc-500">Tap a mentor to start a live chat. Doubts are logged and resolved in-context.</p>
+            </div>
+            <span className="flex items-center gap-1.5 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-3 py-1 text-xs font-medium text-emerald-400">
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
+              </span>
+              3 online
+            </span>
+          </div>
+          <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {LIVE_MENTORS.map((m) => (
+              <button
+                key={m.id}
+                onClick={() => askMentor(m.prompt)}
+                className="group rounded-2xl border border-white/10 bg-white/[0.03] p-4 text-left transition hover:border-violet-500/30 hover:bg-white/[0.05]"
+              >
+                <div className="flex items-center gap-3">
+                  <span
+                    className="flex h-10 w-10 items-center justify-center rounded-full text-sm font-bold text-white"
+                    style={{ background: `linear-gradient(135deg, ${m.color}, ${m.color}88)` }}
+                  >
+                    {m.name[0]}
+                  </span>
+                  <div className="min-w-0">
+                    <div className="flex items-center gap-1.5 text-sm font-semibold">
+                      {m.name}
+                      <span className={`flex items-center gap-1 text-[10px] font-medium ${m.online ? "text-emerald-400" : "text-zinc-500"}`}>
+                        <span className={`h-1.5 w-1.5 rounded-full ${m.online ? "bg-emerald-400" : "bg-zinc-600"}`} />
+                        {m.online ? "online" : "away"}
+                      </span>
+                    </div>
+                    <div className="truncate text-xs text-zinc-500">{m.specialty}</div>
+                  </div>
+                </div>
+                <div className="mt-3 flex items-center gap-1 text-xs font-medium text-violet-400 opacity-0 transition group-hover:opacity-100">
+                  Start live chat <ArrowRight className="h-3 w-3" />
+                </div>
+              </button>
+            ))}
+          </div>
+        </section>
+
         <div className="mt-6 grid gap-6 lg:grid-cols-3">
           <div className="space-y-6 lg:col-span-2">
             <section id="today" className="card-glow rounded-2xl border border-violet-500/20 bg-gradient-to-b from-violet-500/[0.08] to-transparent p-6 sm:p-7">
@@ -144,24 +221,29 @@ export default function Dashboard() {
                     <Rocket className="h-6 w-6 text-white" />
                   </span>
                   <div>
-                    <div className="flex items-center gap-2">
+                    <div className="flex flex-wrap items-center gap-2">
                       <span className="rounded-full bg-violet-500/15 px-2.5 py-0.5 text-xs font-semibold text-violet-300">
-                        Day {today.day}
+                        CLAUDE challenge · IST day {today.day}
                       </span>
                       <span className="rounded-full bg-white/10 px-2.5 py-0.5 text-xs font-medium text-zinc-300">
                         {today.level === "advanced" ? "Advanced" : "Core"} · ~{today.minutes} min
                       </span>
+                      <span className="rounded-full bg-white/10 px-2.5 py-0.5 text-xs font-medium text-zinc-400">
+                        Day {today.day} of {CURRENT_DAY}
+                      </span>
                     </div>
-                    <h2 className="mt-1.5 text-xl font-semibold tracking-tight sm:text-2xl">{today.title}</h2>
+                    <h2 className="mt-1.5 text-xl font-semibold tracking-tight sm:text-2xl">
+                      {today.title}
+                    </h2>
                   </div>
                 </div>
                 <div className="flex items-center gap-1.5 rounded-full bg-amber-500/10 px-3 py-1.5 text-sm font-semibold text-amber-400">
                   <Flame className="h-4 w-4" />
-                  {profile.streak}
+                  {profile.streak} · max {profile.longestStreak}
                 </div>
               </div>
 
-              <p className="mt-4 text-zinc-400">{today.blurb} Your PROMPTS.md is your receipts — make it readable, honest, and in the repo.</p>
+              <TaskView node={today} />
 
               <div className="mt-6 grid gap-3 sm:grid-cols-3">
                 {[
@@ -201,10 +283,45 @@ export default function Dashboard() {
                   <Sparkles className="h-4 w-4 text-violet-400" />
                   Ask the mentor
                 </button>
+                <button
+                  onClick={askCatchUp}
+                  className="flex items-center justify-center gap-2 rounded-2xl border border-amber-500/25 bg-amber-500/10 px-6 py-3.5 text-sm font-semibold text-amber-300 transition hover:bg-amber-500/20"
+                >
+                  <Bolt className="h-4 w-4" />
+                  Catch-up plan
+                </button>
               </div>
             </section>
 
             <JourneyPath />
+
+            <section className="rounded-2xl border border-white/10 bg-zinc-900/70 p-5 sm:p-6">
+              <h2 className="text-lg font-semibold tracking-tight">Recent activity · last 7 submissions</h2>
+              <p className="text-sm text-zinc-500">Every submission, logged to memory.</p>
+              <div className="mt-4 space-y-2.5">
+                {RECENT_SUBMISSIONS.map((s) => (
+                  <div
+                    key={s.day}
+                    className="flex items-center justify-between rounded-xl border border-white/5 bg-white/[0.02] px-4 py-3"
+                  >
+                    <div className="flex items-center gap-3">
+                      <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-500/15">
+                        <Check className="h-4 w-4 text-emerald-400" />
+                      </span>
+                      <div>
+                        <div className="text-sm font-medium">
+                          Day {s.day} · {s.title}
+                        </div>
+                        <div className="text-xs text-zinc-500">completed on {s.date}</div>
+                      </div>
+                    </div>
+                    <span className="rounded-full bg-emerald-500/10 px-2.5 py-1 text-xs font-medium text-emerald-400">
+                      {s.outcome}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </section>
           </div>
 
           <div className="flex min-h-[520px] flex-col">
@@ -251,7 +368,7 @@ export default function Dashboard() {
       <footer className="border-t border-white/5 py-8">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-4 text-sm text-zinc-500 sm:flex-row sm:px-6">
           <span>ABTalks · Redesigned — a hackathon rebuild, vibe-coded.</span>
-          <span className="text-zinc-600">Memory layer: local store (Breeth-ready provider) · {xpPct}% synced</span>
+          <span className="text-zinc-600">Memory layer: local store (Breeth-ready provider) · synced</span>
         </div>
       </footer>
     </div>

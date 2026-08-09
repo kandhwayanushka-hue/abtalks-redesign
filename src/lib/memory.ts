@@ -4,7 +4,8 @@ export type MemoryKind =
   | "submission"
   | "feedback"
   | "preference"
-  | "milestone";
+  | "milestone"
+  | "doubt";
 
 export interface MemoryEntry {
   id: string;
@@ -23,8 +24,12 @@ export interface MentorMessage {
 export interface LearnerProfile {
   name: string;
   streak: number;
+  longestStreak: number;
   completed: number;
   currentDay: number;
+  referrals: number;
+  referralCode: string;
+  startDate: string;
   strengths: string[];
   struggleAreas: string[];
   caughtUp: boolean;
@@ -36,11 +41,15 @@ const MEMORY_KEY = "abtalks.memory.v1";
 
 const SEED_PROFILE: LearnerProfile = {
   name: "Anushka",
-  streak: 54,
-  completed: 50,
+  streak: 0,
+  longestStreak: 1,
+  completed: 1,
   currentDay: 60,
-  strengths: ["deployment", "tooling", "agents"],
-  struggleAreas: ["system prompts", "structured output"],
+  referrals: 0,
+  referralCode: "HET9HA",
+  startDate: "5 Jun 2026",
+  strengths: ["prompting basics"],
+  struggleAreas: ["consistency", "structured output"],
   caughtUp: false,
 };
 
@@ -48,18 +57,18 @@ const SEED_HISTORY: MentorMessage[] = [
   {
     role: "assistant",
     content:
-      "Hey Anushka — welcome to Day 60. I remember Day 8 (your IDE-day) was where tooling finally clicked for you. Two days to the deadline, one task left. Let's ship v1.0.0 properly.",
+      "Hey Anushka — welcome to Day 60. I looked at your calendar: Day 1 shipped on time on 5 Jun, then life happened and 59 days slipped by. The old dashboard just showed 'Missed, missed, missed' and did nothing about it. That's why I exist.",
     ts: 0,
   },
   {
     role: "user",
-    content: "still shaky on structured output, any quick trick for day 6?",
+    content: "i got stuck early and stopped showing up. can i still finish?",
     ts: 1,
   },
   {
     role: "assistant",
     content:
-      "Remembered. Since then I've been tightening structured-output prompts on your builds — it paid off. One rule that sticks: give the model a schema, not adjectives. I'll keep that in mind for today's review.",
+      "Yes. I've turned your 58 missed days into a 14-day catch-up sprint — one per day, ordered so you learn the fundamentals first. You only completed Day 1, so I'm starting you at the basics you skipped and skipping nothing critical. Say 'catch up' and I'll lay out today's first step.",
     ts: 2,
   },
 ];

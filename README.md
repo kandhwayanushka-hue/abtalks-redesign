@@ -16,6 +16,12 @@ day, a persistent memory layer, and a skill path that shows real progress.
   graduate") instead of a wall of instructions.
 - **An AI mentor that remembers** — persistent memory of struggles,
   strengths, and feedback across all 60 days; hints are personalized.
+- **Live chat & doubt solving** — a strip of specialist mentors (Prompting,
+  Deployment, Portfolio, Journey). Tap one to open a live chat; doubts are
+  logged and resolved in-context.
+- **Visual + voice learning** — every daily challenge has a Read ⇄ Visual
+  toggle (step-by-step flow diagram) and a Listen button (text-to-speech),
+  so you can learn by reading, seeing, or hearing.
 - **Submit → feedback → polish** — paste your work, get a review against
   the judging rubric, fix, re-submit.
 - **A skill path, not a checklist** — 60-day grid colored by skill

@@ -1,14 +1,24 @@
 export type Skill = "prompting" | "tools" | "deployment" | "agents" | "systems" | "portfolio";
 
+export type DayStatus = "ontime" | "rejected" | "missed" | "catchup" | "future" | "current";
+
 export interface DayNode {
   day: number;
   title: string;
   skill: Skill;
   level: "core" | "advanced";
   minutes: number;
-  status: "done" | "current" | "locked" | "missed";
+  status: DayStatus;
   blurb: string;
 }
+
+export const STATUS_LEGEND: { status: DayStatus; label: string; color: string; bg: string }[] = [
+  { status: "ontime", label: "On time", color: "#34d399", bg: "rgba(52,211,153,0.18)" },
+  { status: "rejected", label: "Rejected", color: "#fb7185", bg: "rgba(251,113,133,0.18)" },
+  { status: "missed", label: "Missed", color: "#a1a1aa", bg: "rgba(161,161,170,0.12)" },
+  { status: "catchup", label: "Missed · catch up", color: "#fbbf24", bg: "rgba(251,191,36,0.18)" },
+  { status: "future", label: "Future", color: "#71717a", bg: "rgba(113,113,122,0.10)" },
+];
 
 export interface SkillMeta {
   id: Skill;
@@ -89,29 +99,33 @@ const raw: Omit<DayNode, "status">[] = [
   { day: 57, title: "Refactor the portfolio", skill: "portfolio", level: "advanced", minutes: 120, blurb: "Your repo is your resume." },
   { day: 58, title: "Polish pass", skill: "portfolio", level: "advanced", minutes: 90, blurb: "Details, docs, screenshots." },
   { day: 59, title: "Final review", skill: "portfolio", level: "advanced", minutes: 90, blurb: "Checklist against the rubric." },
-  { day: 60, title: "Ship v1.0.0 and graduate", skill: "portfolio", level: "advanced", minutes: 120, blurb: "Tag the release, celebrate." },
+  { day: 60, title: "Final Review, Portfolio & Graduation – Ship v1.0.0 and Graduate the Challenge", skill: "portfolio", level: "advanced", minutes: 120, blurb: "Final review, portfolio polish, release tag, graduation." },
 ];
 
-const MISSED_DAYS = new Set<number>([43, 44, 52]);
+const REAL_DATA_DAYS = new Set<number>([1]);
 
 export const JOURNEY: DayNode[] = raw.map((d) => {
-  let status: DayNode["status"];
+  let status: DayStatus;
   if (d.day === CURRENT_DAY) status = "current";
-  else if (d.day < CURRENT_DAY) status = MISSED_DAYS.has(d.day) ? "missed" : "done";
-  else status = "locked";
+  else if (REAL_DATA_DAYS.has(d.day)) status = "ontime";
+  else if (d.day <= 14) status = "catchup";
+  else status = "missed";
   return { ...d, status };
 });
 
-export const completedCount = JOURNEY.filter((d) => d.status === "done").length;
+export const completedCount = 1;
 export const missedCount = JOURNEY.filter((d) => d.status === "missed").length;
+export const catchUpCount = JOURNEY.filter((d) => d.status === "catchup").length;
 
-export const XP_TOTAL = 4600;
-export const STREAK = 54;
+export const XP_TOTAL = 5000;
+export const STREAK = 0;
+export const LONGEST_STREAK = 1;
+export const REFERRALS = 0;
+export const REFERRAL_CODE = "HET9HA";
 
-export interface Referral {
-  code: string;
-  used: number;
-}
+export const RECENT_SUBMISSIONS = [
+  { day: 1, title: "First prompt, first win", date: "5 Jun 2026", outcome: "on time" },
+];
 
 export interface ShowcasePost {
   author: string;

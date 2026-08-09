@@ -66,12 +66,15 @@ export default function MentorChat() {
           </span>
           <div>
             <div className="flex items-center gap-2 text-sm font-semibold">
-              Your AI Mentor
+              Live mentor · doubt solving
               <Sparkles className="h-3.5 w-3.5 text-violet-400" />
             </div>
             <div className="flex items-center gap-1.5 text-xs text-zinc-500">
-              <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-              remembers all 60 days
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
+              </span>
+              online · remembers all 60 days
             </div>
           </div>
         </div>
