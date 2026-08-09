@@ -336,8 +336,15 @@ export default function Home() {
             {CERTIFICATES.map((c) => (
               <TiltCard
                 key={c.part}
-                className="flex flex-col rounded-2xl border border-white/10 bg-white/[0.03] p-6"
+                className="relative flex flex-col rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition hover:border-violet-500/30"
               >
+                <Link
+                  href={`/challenge/${c.start}`}
+                  aria-label={`Open ${c.title} — Days ${c.start} to ${c.end} challenges`}
+                  className="absolute inset-0 z-[1] rounded-2xl"
+                >
+                  <span className="sr-only">Open challenges</span>
+                </Link>
                 <div className="flex items-center justify-between">
                   <span className="text-xs font-semibold uppercase tracking-widest text-violet-400">
                     Part {c.part}
@@ -351,20 +358,27 @@ export default function Home() {
                     ))}
                   </span>
                 </div>
-                <h3 className="mt-3 text-lg font-semibold tracking-tight [transform:translateZ(16px)]">{c.title}</h3>
-                <div className="mt-1 text-sm text-zinc-500">
+                <h3 className="relative z-[2] mt-3 text-lg font-semibold tracking-tight [transform:translateZ(16px)]">
+                  <Link
+                    href={`/challenge/${c.start}`}
+                    className="transition group-hover:text-violet-300 group-hover:underline"
+                  >
+                    {c.title}
+                  </Link>
+                </h3>
+                <div className="relative z-[2] mt-1 text-sm text-zinc-500">
                   Days {c.start}–{c.end} ·{" "}
                   <span className="text-zinc-300">{c.difficulty} difficulty</span>
                 </div>
-                <p className="mt-3 text-sm leading-relaxed text-zinc-400">{c.blurb}</p>
-                <div className="mt-4 flex flex-wrap gap-1.5">
+                <p className="relative z-[2] mt-3 text-sm leading-relaxed text-zinc-400">{c.blurb}</p>
+                <div className="relative z-[2] mt-4 flex flex-wrap gap-1.5">
                   {c.skills.map((sk) => (
                     <span key={sk} className="rounded-full bg-white/10 px-2.5 py-1 text-xs text-zinc-300">
                       {sk}
                     </span>
                   ))}
                 </div>
-                <div className="mt-auto pt-5">
+                <div className="relative z-[2] mt-auto pt-5">
                   <Link
                     href={`/certificate/${c.part}`}
                     className="flex items-center justify-center gap-2 rounded-xl border border-amber-500/30 bg-amber-500/10 px-4 py-2.5 text-sm font-semibold text-amber-300 transition hover:bg-amber-500/20"
