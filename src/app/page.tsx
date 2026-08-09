@@ -153,6 +153,9 @@ export default function Home() {
             <a href="#memory" className="transition hover:text-white">
               Memory
             </a>
+            <Link href="/login" className="transition hover:text-white">
+              Sign in
+            </Link>
           </nav>
           <Link
             href="/dashboard"
@@ -185,7 +188,7 @@ export default function Home() {
             </p>
             <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <Link
-                href="/dashboard"
+                href="/login"
                 className="group flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-violet-500 to-blue-500 px-7 py-3.5 text-sm font-semibold text-white transition hover:brightness-110 sm:w-auto"
               >
                 Start your challenge
@@ -301,15 +304,13 @@ export default function Home() {
               LinkedIn, copy your referral code, and tomorrow you’ll feel the difference.
             </p>
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-              <a
-                href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fabtalks-redesign-fawn.vercel.app"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex w-full items-center justify-center gap-2 rounded-full bg-white px-7 py-3.5 text-sm font-semibold text-zinc-950 transition hover:bg-zinc-200 sm:w-auto"
+              <Link
+                href="/commit"
+                className="group flex w-full items-center justify-center gap-2 rounded-full bg-white px-7 py-3.5 text-sm font-semibold text-zinc-950 transition hover:bg-zinc-200 sm:w-auto"
               >
-                Commit on LinkedIn
+                Commit publicly
                 <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
-              </a>
+              </Link>
               <button
                 onClick={() => {
                   navigator.clipboard?.writeText("HET9HA");

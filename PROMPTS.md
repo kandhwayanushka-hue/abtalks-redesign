@@ -181,6 +181,23 @@ to the real learner state.
 
 **Result:** Live at https://abtalks-redesign-fawn.vercel.app (see README).
 
+## 12. Commitment flow (login + confirmation page)
+
+**Prompt:**
+> Dont we have to add that that confirmation page — that google login one
+
+**Result:** Added two bonus flow screens (auth kept mocked, per the
+out-of-scope rule):
+- `/login` — a "Continue with Google" sign-in screen (mock Google button
+  simulates a sign-in, then routes into the dashboard).
+- `/commit` — a public-commit confirmation page after clicking
+  "Commit publicly": the commitment text, a LinkedIn share button, the
+  referral code with copy action, "what happens next" steps, and a
+  "Start Day 1" CTA. The commit is written to mentor memory via
+  `remember("milestone", "public-commit", …)`.
+- Landing page wired: header "Sign in" and hero "Start your challenge" →
+  `/login`; "Commit publicly" → `/commit`.
+
 ---
 
 ## How the memory layer maps to the build

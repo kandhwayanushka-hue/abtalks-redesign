@@ -25,6 +25,12 @@ Screens are mobile-first (designed at 390px):
 - `/day/12` — A full challenge day: read the task, understand what to build,
   submit proof of work (GitHub commit + LinkedIn post)
 
+Bonus flow screens (mocked — auth is out of scope for this build):
+
+- `/login` — "Continue with Google" sign-in screen (mock, routes into the dashboard)
+- `/commit` — Public-commit confirmation page: your promise, LinkedIn share,
+  referral code, and "Start Day 1"
+
 ## Edge cases handled
 
 - First day with no streak (streak 0, "Welcome to ABTalks")
@@ -57,6 +63,9 @@ Screens are mobile-first (designed at 390px):
 - **A skill path, not a checklist** — 60-day grid colored by skill
   (prompting, tools, agents, systems, deployment, portfolio).
 - **Community that ships** — a gallery of Day-N builds to vote on.
+- **A real commitment flow** — "Continue with Google" sign-in, then a public
+  commitment confirmation page (promise, LinkedIn share, referral code) before
+  Day 1 starts — the accountability loop #100DaysOfCode is built on.
 
 ## Memory layer (Breeth-ready)
 
