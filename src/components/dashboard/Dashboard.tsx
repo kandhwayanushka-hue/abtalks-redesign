@@ -5,6 +5,7 @@ import Link from "next/link";
 import MentorChat from "./MentorChat";
 import JourneyPath from "./JourneyPath";
 import TaskView from "./TaskView";
+import Standing from "./Standing";
 import { MobileNav } from "@/components/day/ChallengeDay";
 import { LIVE_MENTORS } from "@/lib/mentors";
 import {
@@ -31,10 +32,10 @@ import {
 } from "@/data/journey";
 
 const navItems = [
-  { label: "Today", active: true },
-  { label: "Journey" },
-  { label: "Mentor" },
-  { label: "Community" },
+  { label: "Today", href: "#today", active: true },
+  { label: "Journey", href: "#journey" },
+  { label: "Mentor", href: "#mentor" },
+  { label: "Community", href: "#community" },
 ];
 
 const posts = [
@@ -89,7 +90,7 @@ export default function Dashboard() {
             {navItems.map((n) => (
               <a
                 key={n.label}
-                href={n.active ? "#today" : "#"}
+                href={n.href}
                 className={`rounded-full px-4 py-1.5 text-sm transition ${
                   n.active ? "bg-white text-zinc-950 font-medium" : "text-zinc-400 hover:text-white"
                 }`}
@@ -227,7 +228,7 @@ export default function Dashboard() {
 
         <div className="mt-6 grid gap-6 lg:grid-cols-3">
           <div className="space-y-6 lg:col-span-2">
-            <section id="today" className="card-glow rounded-2xl border border-violet-500/20 bg-gradient-to-b from-violet-500/[0.08] to-transparent p-6 sm:p-7">
+            <section id="today" className="card-glow scroll-mt-20 rounded-2xl border border-violet-500/20 bg-gradient-to-b from-violet-500/[0.08] to-transparent p-6 sm:p-7">
               <div className="flex flex-wrap items-center justify-between gap-3">
                 <div className="flex items-center gap-3">
                   <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-violet-500 to-blue-500">
@@ -306,7 +307,11 @@ export default function Dashboard() {
               </div>
             </section>
 
-            <JourneyPath />
+            <div id="journey" className="scroll-mt-20">
+              <JourneyPath />
+            </div>
+
+            <Standing profile={profile} />
 
             <section className="rounded-2xl border border-white/10 bg-zinc-900/70 p-5 sm:p-6">
               <h2 className="text-lg font-semibold tracking-tight">Recent activity · last 7 submissions</h2>
@@ -337,12 +342,12 @@ export default function Dashboard() {
             </section>
           </div>
 
-          <div className="flex min-h-[520px] flex-col">
+          <div id="mentor" className="flex min-h-[520px] scroll-mt-20 flex-col">
             <MentorChat />
           </div>
         </div>
 
-        <section className="mt-6">
+        <section id="community" className="mt-6 scroll-mt-20">
           <div className="flex items-center justify-between">
             <div>
               <h2 className="text-lg font-semibold tracking-tight">Community · this week’s ships</h2>

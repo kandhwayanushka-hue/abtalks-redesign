@@ -31,6 +31,15 @@ Screens are mobile-first (designed at 390px):
 - Missed days (calendar status + catch-up banner + catch-up plan)
 - Empty profile (graceful defaults instead of a crash)
 
+## Design references
+
+- **#100DaysOfCode** — simple numbered rules, a "publicly commit"
+  accountability CTA (LinkedIn share + referral code), action-first next steps.
+- **CodeDay** — student testimonials, college-presence chips, impact framing.
+- Structure: every landing section has an eyebrow label so the page scans
+  cleanly; the dashboard groups progress into one "Your standing" card
+  (overall completion ring, level, achievement badges).
+
 ## What changed
 
 - **One task, full focus** — a single daily card (Day 60: "Ship v1.0.0 and

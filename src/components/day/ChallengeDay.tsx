@@ -75,7 +75,7 @@ export default function ChallengeDay({ day, totalDays }: { day: number; totalDay
             <Link
               href="/dashboard"
               className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 transition hover:bg-white/10"
-              aria-label="Back to dashboard"
+              aria-label="Back to your challenge"
             >
               <ArrowLeft className="h-4 w-4" />
             </Link>
@@ -278,7 +278,7 @@ export default function ChallengeDay({ day, totalDays }: { day: number; totalDay
 export function MobileNav({ active }: { active: "home" | "dash" | "day" }) {
   const items = [
     { id: "home" as const, label: "Home", href: "/" },
-    { id: "dash" as const, label: "Dashboard", href: "/dashboard" },
+    { id: "dash" as const, label: "Your challenge", href: "/dashboard" },
     { id: "day" as const, label: "Today", href: `/day/${CURRENT_DAY}` },
   ];
   return (

@@ -136,9 +136,9 @@ to the real learner state.
   (GitHub URL, LinkedIn URL, reflection) that persists to memory and flips
   the day's status to On time. Handles Today / Missed · catch up / Future /
   already-submitted states.
-- **Mobile-first:** a fixed bottom navigation bar (Home / Dashboard / Today)
-  visible at 390px, hamburger-free, with content padding so nothing is
-  hidden behind it.
+- **Mobile-first:** a fixed bottom navigation bar (Home / Your challenge /
+  Today) visible at 390px, hamburger-free, with content padding so nothing
+  is hidden behind it.
 - **Edge cases:** first day with no streak, missed-day catch-up banner,
   empty profile (graceful "Welcome to ABTalks" defaults).
 - **Thoughtful idea:** the memory layer + catch-up plan — the platform
@@ -151,7 +151,30 @@ to the real learner state.
   /day/12
   ```
 
-## 10. Deployment
+## 10. UI/UX reference pass (#100DaysOfCode + CodeDay)
+
+**Prompt:**
+> Take reference from https://www.100daysofcode.com and
+> https://www.codeday.org. Add anything useful and make the design more
+> organized and less clumsy.
+
+**Result (applied, not copied):**
+- **#100DaysOfCode learnings:** a prominent "Three rules. That's the whole
+  challenge" numbered section (build daily / push a GitHub commit / post on
+  LinkedIn); a "Publicly commit — make it real" accountability band that
+  opens a LinkedIn share and copies the referral code (the site's signature
+  accountability trick); action-oriented next steps.
+- **CodeDay learnings:** student testimonial cards (trust), a "students
+  already shipping from" college chips row (presence, like CodeDay's city
+  list), and impact-focused framing.
+- **Organization:** every landing section now has a small eyebrow label
+  ("The rules", "Students, not statistics", etc.) so the page scans top to
+  bottom instead of feeling like stacked boxes. Dashboard gained a
+  "Your standing" card — an overall-completion SVG ring, level, and
+  achievement badges (satisfies the "Overall completion / standing" rubric
+  point in one place).
+
+## 11. Deployment
 
 **Prompt:**
 > Deploy to Vercel and make sure the live URL is reachable.

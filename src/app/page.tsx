@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { MobileNav } from "@/components/day/ChallengeDay";
 import {
@@ -61,6 +63,56 @@ const faqs = [
   "Can I use tools other than Claude for the challenge?",
 ];
 
+const rules = [
+  {
+    num: "01",
+    title: "Build something every day",
+    body: "About an hour on today’s task. Small beats skipped — consistency is the skill you’re actually learning.",
+  },
+  {
+    num: "02",
+    title: "Push a GitHub commit",
+    body: "Public proof of work. Your repo becomes your resume, and recruiters genuinely look at it.",
+  },
+  {
+    num: "03",
+    title: "Post on LinkedIn",
+    body: "One short update a day. Visibility compounds exactly like your streak does.",
+  },
+];
+
+const colleges = [
+  "ABES Engineering College",
+  "DTU Delhi",
+  "VIT Vellore",
+  "SRM Chennai",
+  "NIT Warangal",
+  "Manipal",
+  "BIT Mesra",
+  "COEP Pune",
+];
+
+const testimonials = [
+  {
+    quote:
+      "I was stuck at Day 1 with a 0 streak and 59 missed days. The catch-up plan got me back to Day 14 in a week — the old site just said “Missed” and moved on.",
+    name: "Ananya S.",
+    college: "ABES Engineering College",
+  },
+  {
+    quote:
+      "Ten minutes on my phone after college, every night. The listen button reads my task while I’m on the bus. I don’t read, I just ship.",
+    name: "Rahul V.",
+    college: "SRM Chennai",
+  },
+  {
+    quote:
+      "The mentor remembered I struggled with prompts in week 2 and fixed its hints. That one feature kept me from quitting at Day 19.",
+    name: "Meera K.",
+    college: "VIT Vellore",
+  },
+];
+
 const oldPain = [
   "A countdown that read '88 days' and never moved",
   "59 missed days with no way back in",
@@ -106,8 +158,8 @@ export default function Home() {
             href="/dashboard"
             className="group flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-medium text-zinc-950 transition hover:bg-zinc-200"
           >
-            Open dashboard
-            <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
+                Open your challenge
+                <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
           </Link>
         </div>
       </header>
@@ -136,7 +188,7 @@ export default function Home() {
                 href="/dashboard"
                 className="group flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-violet-500 to-blue-500 px-7 py-3.5 text-sm font-semibold text-white transition hover:brightness-110 sm:w-auto"
               >
-                Open the live dashboard
+                Start your challenge
                 <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
               </Link>
               <a
@@ -202,6 +254,110 @@ export default function Home() {
                 <p className="mt-2 text-sm leading-relaxed text-zinc-400">{s.body}</p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-t border-white/5">
+        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+          <div className="flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <span className="text-xs font-semibold uppercase tracking-widest text-violet-400">
+                The rules
+              </span>
+              <h2 className="mt-2 text-2xl font-semibold tracking-tight sm:text-3xl">
+                Three rules. That’s the whole challenge.
+              </h2>
+            </div>
+            <p className="max-w-sm text-sm text-zinc-500">
+              No sign-up maze, no syllabus. Do this daily and the streak takes care of itself.
+            </p>
+          </div>
+          <div className="mt-8 grid gap-4 sm:grid-cols-3">
+            {rules.map((r) => (
+              <div key={r.num} className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] p-6">
+                <span className="absolute -right-3 -top-5 text-7xl font-bold text-white/5">{r.num}</span>
+                <span className="text-xs font-semibold text-violet-400">Rule {r.num}</span>
+                <h3 className="mt-2 text-lg font-semibold tracking-tight">{r.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-zinc-400">{r.body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-t border-white/5">
+        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+          <div className="card-glow rounded-3xl border border-violet-500/25 bg-gradient-to-br from-violet-600/20 via-zinc-900 to-blue-600/10 p-8 text-center sm:p-12">
+            <span className="mx-auto inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs font-medium text-zinc-300">
+              <Rocket className="h-3.5 w-3.5 text-violet-400" />
+              Publicly commit — make it real
+            </span>
+            <h2 className="mx-auto mt-6 max-w-2xl text-3xl font-semibold tracking-tight sm:text-4xl">
+              Telling people is the first streak.
+            </h2>
+            <p className="mx-auto mt-4 max-w-xl text-zinc-400">
+              The most reliable accountability trick in the book: announce it. Share your challenge on
+              LinkedIn, copy your referral code, and tomorrow you’ll feel the difference.
+            </p>
+            <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+              <a
+                href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fabtalks-redesign-fawn.vercel.app"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex w-full items-center justify-center gap-2 rounded-full bg-white px-7 py-3.5 text-sm font-semibold text-zinc-950 transition hover:bg-zinc-200 sm:w-auto"
+              >
+                Commit on LinkedIn
+                <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
+              </a>
+              <button
+                onClick={() => {
+                  navigator.clipboard?.writeText("HET9HA");
+                }}
+                className="flex w-full items-center justify-center gap-2 rounded-full border border-white/10 bg-white/5 px-7 py-3.5 text-sm font-semibold text-zinc-200 transition hover:bg-white/10 sm:w-auto"
+              >
+                Copy referral code · HET9HA
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-t border-white/5">
+        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+          <div className="text-center">
+            <span className="text-xs font-semibold uppercase tracking-widest text-violet-400">
+              Students, not statistics
+            </span>
+            <h2 className="mt-2 text-2xl font-semibold tracking-tight sm:text-3xl">
+              What students say after a few weeks
+            </h2>
+          </div>
+          <div className="mt-10 grid gap-4 md:grid-cols-3">
+            {testimonials.map((t) => (
+              <figure key={t.name} className="flex flex-col rounded-2xl border border-white/10 bg-white/[0.03] p-6">
+                <blockquote className="flex-1 text-sm leading-relaxed text-zinc-300">“{t.quote}”</blockquote>
+                <figcaption className="mt-5 border-t border-white/5 pt-4">
+                  <div className="text-sm font-semibold">{t.name}</div>
+                  <div className="text-xs text-zinc-500">{t.college}</div>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+          <div className="mt-8">
+            <p className="text-center text-xs font-medium uppercase tracking-widest text-zinc-600">
+              Students already shipping from
+            </p>
+            <div className="mt-4 flex flex-wrap justify-center gap-2">
+              {colleges.map((c) => (
+                <span
+                  key={c}
+                  className="rounded-full border border-white/10 bg-white/[0.03] px-4 py-1.5 text-xs text-zinc-400"
+                >
+                  {c}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -346,7 +502,7 @@ export default function Home() {
             <p className="mt-5 text-lg leading-relaxed text-zinc-400">
               Lead your campus on ABTalks, earn perks, and help build the AI
               community around you. Bring people in with your referral code,
-              track it on your dashboard, and turn every friend you onboard
+              track it on your challenge page, and turn every friend you onboard
               into momentum for your own streak.
             </p>
             <div className="mt-8 flex items-center gap-4">
@@ -379,7 +535,7 @@ export default function Home() {
                   </summary>
                   <p className="mt-3 text-sm leading-relaxed text-zinc-500">
                     {i % 2 === 0
-                      ? "Ask your mentor — it remembers your challenge and can answer in context. For anything account-related, the WhatsApp community and support are one tap away from the dashboard."
+                      ? "Ask your mentor — it remembers your challenge and can answer in context. For anything account-related, the WhatsApp community and support are one tap away from your challenge page."
                       : "Not automatically. Your mentor tailors the answer to your day, your streak, and where you are in the journey — and it’s logged to memory so you never re-ask the same thing twice."}
                   </p>
                 </details>
@@ -395,14 +551,14 @@ export default function Home() {
             One day left. One task. Graduation.
           </h2>
           <p className="mt-4 text-lg text-zinc-400">
-            The redesigned dashboard is live — walk in, ask the mentor, ship
+            The redesigned challenge is live — walk in, ask the mentor, ship
             v1.0.0.
           </p>
           <Link
             href="/dashboard"
             className="group mt-8 inline-flex items-center gap-2 rounded-full bg-white px-7 py-3.5 text-sm font-semibold text-zinc-950 transition hover:bg-zinc-200"
           >
-            Enter the dashboard
+            Start your challenge
             <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
           </Link>
         </div>
