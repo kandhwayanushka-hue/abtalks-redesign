@@ -181,11 +181,20 @@ export const localMemoryProvider: MemoryProvider = {
   },
 };
 
+function breethHeaders(): Record<string, string> {
+  const headers: Record<string, string> = { "Content-Type": "application/json" };
+  const key = process.env.BREETH_API_KEY || process.env.NEXT_PUBLIC_BREETH_KEY;
+  if (key) headers.Authorization = `Bearer ${key}`;
+  return headers;
+}
+
 export const breethProvider: MemoryProvider | null =
   typeof process !== "undefined" && process.env.NEXT_PUBLIC_BREETH_URL
     ? {
         async read(key) {
-          const res = await fetch(`${process.env.NEXT_PUBLIC_BREETH_URL}/memories/${key}`);
+          const res = await fetch(`${process.env.NEXT_PUBLIC_BREETH_URL}/memories/${key}`, {
+            headers: breethHeaders(),
+          });
           if (!res.ok) return null;
           const data = await res.json();
           return data.value ?? null;
@@ -193,7 +202,7 @@ export const breethProvider: MemoryProvider | null =
         async write(key, value) {
           await fetch(`${process.env.NEXT_PUBLIC_BREETH_URL}/memories/${key}`, {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: breethHeaders(),
             body: JSON.stringify({ value }),
           });
         },
