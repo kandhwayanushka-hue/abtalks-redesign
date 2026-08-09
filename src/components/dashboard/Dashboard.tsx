@@ -41,6 +41,7 @@ const navItems = [
   { label: "Interview", href: "/interview" },
   { label: "Content", href: "/content" },
   { label: "Certificates", href: "/certificates" },
+  { label: "Profile", href: "/profile" },
 ];
 
 const posts = [
@@ -116,9 +117,19 @@ export default function Dashboard() {
                 <div className="text-sm font-medium leading-tight">{studentName}</div>
                 <div className="text-xs text-zinc-500">Solo · Day {CURRENT_DAY}</div>
               </div>
-              <span className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-violet-500 to-blue-500 text-sm font-bold text-white">
-                AK
-              </span>
+              <Link
+                href="/profile"
+                aria-label="Open profile"
+                className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-violet-500 to-blue-500 text-sm font-bold text-white transition hover:brightness-110"
+              >
+                {studentName
+                  .split(" ")
+                  .filter(Boolean)
+                  .map((n) => n[0])
+                  .slice(0, 2)
+                  .join("")
+                  .toUpperCase()}
+              </Link>
             </div>
           </div>
         </div>

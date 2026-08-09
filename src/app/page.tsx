@@ -704,9 +704,12 @@ export default function Home() {
               into momentum for your own streak.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-4">
-              <button className="rounded-full bg-white px-6 py-3 text-sm font-semibold text-zinc-950 transition hover:bg-zinc-200">
+              <Link
+                href="/ambassador"
+                className="rounded-full bg-white px-6 py-3 text-sm font-semibold text-zinc-950 transition hover:bg-zinc-200"
+              >
                 Become an ambassador
-              </button>
+              </Link>
               <a
                 href="https://www.youtube.com/results?search_query=ABTalks+on+AI"
                 target="_blank"

@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Flame, Sparkles } from "@/components/icons";
+import { setUser } from "@/lib/auth";
 
 function GoogleG(props: React.SVGProps<SVGSVGElement>) {
   return (
@@ -38,7 +39,9 @@ export default function LoginPage() {
   function signIn() {
     setLoading(true);
     window.setTimeout(() => {
-      setAccount({ name: "Anushka", email: "anushka@abes.ac.in" });
+      const user = { name: "Anushka", email: "anushka@abes.ac.in", joinedAt: new Date().toISOString(), provider: "google" as const };
+      setUser(user);
+      setAccount(user);
       setLoading(false);
       window.setTimeout(() => router.push("/dashboard"), 500);
     }, 700);

@@ -188,6 +188,20 @@ export const Sun = (p: SVGProps<SVGSVGElement>) => (
 
 export const Moon = (p: SVGProps<SVGSVGElement>) => (
   <svg {...base(p)}>
-    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+    <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z" />
+  </svg>
+);
+
+export const Mail = (p: SVGProps<SVGSVGElement>) => (
+  <svg {...base(p)}>
+    <rect x="2" y="4" width="20" height="16" rx="2" />
+    <path d="m22 7-10 6L2 7" />
+  </svg>
+);
+
+export const Gift = (p: SVGProps<SVGSVGElement>) => (
+  <svg {...base(p)}>
+    <rect x="3" y="8" width="18" height="4" rx="1" />
+    <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7M12 8v13M12 8s-1-5-4.5-5C5.6 3 5 4 5 5.5 5 7 7 8 12 8zm0 0s1-5 4.5-5c1.9 0 2.5 1 2.5 2.5C19 7 17 8 12 8z" />
   </svg>
 );
