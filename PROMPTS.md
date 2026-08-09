@@ -91,7 +91,7 @@ status, missed-days support).
 **Prompt:**
 > Deploy to Vercel and make sure the live URL is reachable.
 
-**Result:** Live at <LIVE_URL> (see README).
+**Result:** Live at https://abtalks-redesign-fawn.vercel.app (see README).
 
 ---
 

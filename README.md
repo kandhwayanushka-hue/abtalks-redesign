@@ -8,7 +8,7 @@ day, a persistent memory layer, and a skill path that shows real progress.
 
 ## Live demo
 
-[abtalks-redesign.vercel.app](https://abtalks-redesign.vercel.app)
+[https://abtalks-redesign-fawn.vercel.app](https://abtalks-redesign-fawn.vercel.app)
 
 ## What changed
 
