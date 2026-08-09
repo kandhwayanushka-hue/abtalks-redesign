@@ -5,8 +5,10 @@ import Link from "next/link";
 import { JOURNEY, CURRENT_DAY, skillColor } from "@/data/journey";
 import { dayBuild } from "@/lib/visual";
 import TaskView from "@/components/dashboard/TaskView";
+import DaySwitcher from "@/components/content/DaySwitcher";
 import {
   ArrowLeft,
+  BookOpen,
   Check,
   CheckCircle,
   Flame,
@@ -124,6 +126,10 @@ export default function ChallengeDay({ day, totalDays }: { day: number; totalDay
         <p className="mt-1.5 text-sm text-zinc-500">
           CLAUDE challenge · IST day {day} · {node.blurb}
         </p>
+
+        <div className="mt-4 rounded-2xl border border-white/10 bg-zinc-900/70 p-3">
+          <DaySwitcher current={day} />
+        </div>
 
         {isFuture && (
           <div className="mt-4 rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-zinc-400">
@@ -284,10 +290,11 @@ export default function ChallengeDay({ day, totalDays }: { day: number; totalDay
   );
 }
 
-export function MobileNav({ active }: { active: "home" | "dash" | "day" }) {
+export function MobileNav({ active }: { active: "home" | "dash" | "day" | "content" }) {
   const items = [
     { id: "home" as const, label: "Home", href: "/" },
     { id: "dash" as const, label: "Your challenge", href: "/dashboard" },
+    { id: "content" as const, label: "Content", href: "/content" },
     { id: "day" as const, label: "Today", href: `/day/${CURRENT_DAY}` },
   ];
   return (
@@ -297,12 +304,13 @@ export function MobileNav({ active }: { active: "home" | "dash" | "day" }) {
           <Link
             key={it.id}
             href={it.href}
-            className={`flex flex-col items-center gap-0.5 rounded-xl px-5 py-2 text-xs font-medium transition ${
+            className={`flex flex-col items-center gap-0.5 rounded-xl px-4 py-2 text-xs font-medium transition sm:px-5 ${
               active === it.id ? "text-violet-400" : "text-zinc-500 hover:text-zinc-300"
             }`}
           >
             {it.id === "home" && <Flame className="h-4 w-4" />}
             {it.id === "dash" && <GitBranch className="h-4 w-4" />}
+            {it.id === "content" && <BookOpen className="h-4 w-4" />}
             {it.id === "day" && <Sparkles className="h-4 w-4" />}
             {it.label}
           </Link>

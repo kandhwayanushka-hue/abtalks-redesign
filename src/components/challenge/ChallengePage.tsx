@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { CURRENT_DAY, JOURNEY, skillColor } from "@/data/journey";
 import { getChallengeContent, type ChallengeResource } from "@/lib/challenge";
 import { getMemory, getProfile, remember } from "@/lib/memory";
+import DaySwitcher from "@/components/content/DaySwitcher";
 import {
   ArrowLeft,
   ArrowRight,
@@ -119,6 +120,10 @@ export default function ChallengePage({ day }: { day: number }) {
               />
             </div>
           </div>
+        </div>
+
+        <div className="mt-4 rounded-2xl border border-white/10 bg-zinc-900/70 p-4">
+          <DaySwitcher current={node.day} />
         </div>
 
         <section id="overview" className="mt-5 scroll-mt-20 rounded-2xl border border-white/10 bg-zinc-900/70 p-5 sm:p-6">

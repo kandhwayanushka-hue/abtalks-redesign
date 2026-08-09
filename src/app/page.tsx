@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { MobileNav } from "@/components/day/ChallengeDay";
+import { CERTIFICATES } from "@/data/certificates";
 import {
   ArrowRight,
   Bolt,
@@ -153,6 +154,9 @@ export default function Home() {
             <a href="#memory" className="transition hover:text-white">
               Memory
             </a>
+            <Link href="/content" className="transition hover:text-white">
+              Content
+            </Link>
             <Link href="/login" className="transition hover:text-white">
               Sign in
             </Link>
@@ -169,7 +173,24 @@ export default function Home() {
 
       <section className="relative overflow-hidden">
         <div className="glow-grid absolute inset-0" />
-        <div className="absolute left-1/2 top-0 h-[420px] w-[720px] -translate-x-1/2 rounded-full bg-violet-600/20 blur-[120px]" />
+        <div className="aurora-bg">
+          <div
+            className="aurora-blob -top-24 left-[6%] h-[500px] w-[500px] bg-violet-600/50"
+            style={{ animationDelay: "0s" }}
+          />
+          <div
+            className="aurora-blob -top-20 right-[4%] h-[480px] w-[480px] bg-blue-500/40"
+            style={{ animationDelay: "-6s" }}
+          />
+          <div
+            className="aurora-blob bottom-[-140px] left-[18%] h-[440px] w-[440px] bg-emerald-500/35"
+            style={{ animationDelay: "-12s" }}
+          />
+          <div
+            className="aurora-blob right-[16%] top-[42%] h-[380px] w-[380px] bg-pink-500/30"
+            style={{ animationDelay: "-3s" }}
+          />
+        </div>
         <div className="relative mx-auto max-w-6xl px-4 pb-16 pt-24 sm:px-6 sm:pt-32">
           <div className="mx-auto max-w-3xl text-center">
             <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs font-medium text-zinc-300">
@@ -255,6 +276,69 @@ export default function Home() {
                 <s.icon className="h-6 w-6 text-violet-400" />
                 <h3 className="mt-4 font-semibold tracking-tight">{s.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-zinc-400">{s.body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-t border-white/5">
+        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+          <div className="flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <span className="text-xs font-semibold uppercase tracking-widest text-violet-400">
+                The syllabus
+              </span>
+              <h2 className="mt-2 text-2xl font-semibold tracking-tight sm:text-3xl">
+                60 days, three parts, three certificates
+              </h2>
+            </div>
+            <p className="max-w-sm text-sm text-zinc-500">
+              Each part is rated by overall difficulty. Finish a part — 20 days — and a
+              Certificate of Achievement unlocks.
+            </p>
+          </div>
+          <div className="mt-8 grid gap-4 lg:grid-cols-3">
+            {CERTIFICATES.map((c) => (
+              <div
+                key={c.part}
+                className="flex flex-col rounded-2xl border border-white/10 bg-white/[0.03] p-6"
+              >
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-semibold uppercase tracking-widest text-violet-400">
+                    Part {c.part}
+                  </span>
+                  <span className="flex items-center gap-0.5" aria-label={`${c.difficulty} difficulty`}>
+                    {[1, 2, 3, 4, 5].map((s) => (
+                      <span
+                        key={s}
+                        className={`h-1.5 w-3 rounded-full ${s <= c.stars ? "bg-violet-400" : "bg-white/10"}`}
+                      />
+                    ))}
+                  </span>
+                </div>
+                <h3 className="mt-3 text-lg font-semibold tracking-tight">{c.title}</h3>
+                <div className="mt-1 text-sm text-zinc-500">
+                  Days {c.start}–{c.end} ·{" "}
+                  <span className="text-zinc-300">{c.difficulty} difficulty</span>
+                </div>
+                <p className="mt-3 text-sm leading-relaxed text-zinc-400">{c.blurb}</p>
+                <div className="mt-4 flex flex-wrap gap-1.5">
+                  {c.skills.map((sk) => (
+                    <span key={sk} className="rounded-full bg-white/10 px-2.5 py-1 text-xs text-zinc-300">
+                      {sk}
+                    </span>
+                  ))}
+                </div>
+                <div className="mt-auto pt-5">
+                  <Link
+                    href={`/certificate/${c.part}`}
+                    className="flex items-center justify-center gap-2 rounded-xl border border-amber-500/30 bg-amber-500/10 px-4 py-2.5 text-sm font-semibold text-amber-300 transition hover:bg-amber-500/20"
+                  >
+                    <Trophy className="h-4 w-4" />
+                    Certificate of Achievement · Day {c.day}
+                  </Link>
+                </div>
               </div>
             ))}
           </div>

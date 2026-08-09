@@ -35,6 +35,25 @@ Bonus flow screens (mocked — auth is out of scope for this build):
   "Start the challenge" button that logs the start to memory and opens the day
 - `/mentor/[id]` — a live mentor chat page; tapping a mentor name on the
   dashboard now redirects here
+- `/content` — the full 60-day syllabus, part by part, each part rated by
+  difficulty, with a day-switcher to open any day's content
+- `/certificates` — your three certificates of achievement (one per 20-day part)
+- `/certificate/[part]` — a printable Certificate of Achievement (print/PDF)
+
+## Design detail
+
+- The landing hero uses an animated aurora background (soft violet / blue /
+  emerald / pink gradient blobs drifting slowly, plus the subtle grid) in the
+  style of devchallenges.io — see `globals.css` (`.aurora-bg`, `.aurora-blob`).
+
+## Syllabus & certificates
+
+- The 60 days are categorized into three parts by overall difficulty:
+  Part 1 (Days 1–20 · Beginner) → Part 2 (Days 21–40 · Intermediate) →
+  Part 3 (Days 41–60 · Advanced). Difficulty is shown as a 5-segment rating.
+- Finishing a part (every 20 days) unlocks a **Certificate of Achievement**.
+  The certificate unlocks once `currentDay` passes the milestone and can be
+  printed or saved as a PDF.
 
 ## Backend (lightweight, real endpoints)
 

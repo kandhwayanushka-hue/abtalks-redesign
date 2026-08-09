@@ -229,6 +229,39 @@ out-of-scope rule):
   and `mentorReply()` greets as that mentor, so "clicking a mentor name"
   actually redirects somewhere and the replies match the person.
 
+## 14. Aurora background, syllabus parts & certificates
+
+**Prompt:**
+> https://devchallenges.io/ on the main page of the website make background
+> like this website also do one thing categorize the syllabus part wise
+> according to overall difficulty rating of it and after every 20 day it will
+> provide certificate of achievement … also add the feature that anyone can
+> switch on content of any day and make a separate navbar section for the
+> content section
+
+**Result:**
+- **Aurora background** — replicated devChallenges.io's animated hero
+  background: soft violet / blue / emerald / pink gradient blobs that slowly
+  drift and scale behind the landing hero, layered over the existing grid
+  (`.aurora-bg` / `.aurora-blob` + `@keyframes aurora-drift` in `globals.css`,
+  with a `prefers-reduced-motion` fallback).
+- **Part-wise syllabus by difficulty** — the 60 days are categorized into three
+  parts in `src/data/certificates.ts`, each with an overall difficulty rating
+  (Part 1 Days 1–20 Beginner ★★, Part 2 Days 21–40 Intermediate ★★★, Part 3
+  Days 41–60 Advanced ★★★★) plus the skills covered. The landing gained a
+  "The syllabus" section rendering the three parts and their difficulty bars.
+- **Certificates every 20 days** — finishing a part unlocks a printable
+  **Certificate of Achievement**. `/certificates` lists the three milestones
+  (earned/locked by `currentDay`); `/certificate/[part]` renders a paper-style
+  certificate (cream, gold double border, seal, signatures, certificate number)
+  with a Print / save-PDF button and `@media print` CSS.
+- **Content section + day switcher** — a dedicated `/content` page (the
+  "content" navbar section) lists the whole 60-day syllabus part by part, with
+  a `DaySwitcher` dropdown to open any day's content; the switcher also lives
+  on the challenge and day screens so anyone can jump to any day. Added
+  "Content" / "Certificates" to the landing header nav, the dashboard nav, and
+  the bottom MobileNav.
+
 ---
 
 ## How the memory layer maps to the build

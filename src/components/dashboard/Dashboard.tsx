@@ -36,6 +36,8 @@ const navItems = [
   { label: "Journey", href: "#journey" },
   { label: "Mentor", href: "#mentor" },
   { label: "Community", href: "#community" },
+  { label: "Content", href: "/content" },
+  { label: "Certificates", href: "/certificates" },
 ];
 
 const posts = [
@@ -89,7 +91,7 @@ export default function Dashboard() {
           </Link>
           <nav className="hidden items-center gap-1 rounded-full border border-white/10 bg-white/5 p-1 md:flex">
             {navItems.map((n) => (
-              <a
+              <Link
                 key={n.label}
                 href={n.href}
                 className={`rounded-full px-4 py-1.5 text-sm transition ${
@@ -97,7 +99,7 @@ export default function Dashboard() {
                 }`}
               >
                 {n.label}
-              </a>
+              </Link>
             ))}
           </nav>
           <div className="flex items-center gap-3">

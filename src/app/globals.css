@@ -33,6 +33,59 @@ body {
   mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 100%);
 }
 
+.aurora-bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.aurora-blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(90px);
+  opacity: 0.5;
+  will-change: transform;
+  animation: aurora-drift 18s ease-in-out infinite alternate;
+}
+
+@keyframes aurora-drift {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(70px, -50px, 0) scale(1.12);
+  }
+  100% {
+    transform: translate3d(-50px, 40px, 0) scale(0.94);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aurora-blob {
+    animation: none;
+  }
+}
+
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #18181b !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+  .print-sheet {
+    position: absolute !important;
+    inset: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+  }
+}
+
 .text-gradient {
   background: linear-gradient(120deg, #a78bfa, #60a5fa 55%, #34d399);
   -webkit-background-clip: text;
