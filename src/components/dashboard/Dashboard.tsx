@@ -5,6 +5,7 @@ import Link from "next/link";
 import MentorChat from "./MentorChat";
 import JourneyPath from "./JourneyPath";
 import TaskView from "./TaskView";
+import { MobileNav } from "@/components/day/ChallengeDay";
 import { LIVE_MENTORS } from "@/lib/mentors";
 import {
   ArrowRight,
@@ -68,6 +69,9 @@ export default function Dashboard() {
 
   if (!profile) return null;
 
+  const studentName = profile.name?.trim() || "Student";
+  const emptyProfile = !profile.name?.trim() || profile.currentDay < 1;
+
   return (
     <div className="min-h-screen bg-zinc-950 text-zinc-100">
       <header className="sticky top-0 z-40 border-b border-white/5 bg-zinc-950/70 backdrop-blur-xl">
@@ -101,7 +105,7 @@ export default function Dashboard() {
             </div>
             <div className="flex items-center gap-2.5">
               <div className="hidden text-right sm:block">
-                <div className="text-sm font-medium leading-tight">{profile.name}</div>
+                <div className="text-sm font-medium leading-tight">{studentName}</div>
                 <div className="text-xs text-zinc-500">Solo · Day {CURRENT_DAY}</div>
               </div>
               <span className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-violet-500 to-blue-500 text-sm font-bold text-white">
@@ -112,11 +116,20 @@ export default function Dashboard() {
         </div>
       </header>
 
-      <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
+      <main className="mx-auto max-w-7xl px-4 py-8 pb-28 sm:px-6 md:pb-8">
+        {emptyProfile && (
+          <div className="mb-6 rounded-2xl border border-violet-500/25 bg-violet-500/10 px-5 py-4">
+            <h2 className="font-semibold text-violet-200">Welcome to ABTalks</h2>
+            <p className="mt-1 text-sm text-zinc-400">
+              Pick a track, then build something every day — a GitHub commit + a LinkedIn post keep your
+              streak alive. Your journey starts at Day 1.
+            </p>
+          </div>
+        )}
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
             <h1 className="text-2xl font-semibold tracking-tight sm:text-3xl">
-              {completedToday ? "Graduated. That's a wrap." : "Good evening, Anushka."}
+              {completedToday ? "Graduated. That's a wrap." : `Good evening, ${studentName}.`}
             </h1>
             <p className="mt-1 text-zinc-500">
               {completedToday
@@ -371,6 +384,8 @@ export default function Dashboard() {
           <span className="text-zinc-600">Memory layer: local store (Breeth-ready provider) · synced</span>
         </div>
       </footer>
+
+      <MobileNav active="dash" />
     </div>
   );
 }

@@ -38,6 +38,7 @@ export interface LearnerProfile {
 const PROFILE_KEY = "abtalks.profile.v1";
 const HISTORY_KEY = "abtalks.history.v1";
 const MEMORY_KEY = "abtalks.memory.v1";
+const SUBMISSIONS_KEY = "abtalks.submissions.v1";
 
 const SEED_PROFILE: LearnerProfile = {
   name: "Anushka",
@@ -132,6 +133,28 @@ export function forgetMemory() {
   window.localStorage.removeItem(MEMORY_KEY);
   window.localStorage.removeItem(HISTORY_KEY);
   window.localStorage.removeItem(PROFILE_KEY);
+}
+
+export interface DaySubmission {
+  day: number;
+  github: string;
+  linkedin: string;
+  note: string;
+  ts: number;
+}
+
+export function getSubmissions(): Record<number, DaySubmission> {
+  return read<Record<number, DaySubmission>>(SUBMISSIONS_KEY, {});
+}
+
+export function getSubmission(day: number): DaySubmission | null {
+  return getSubmissions()[day] ?? null;
+}
+
+export function saveSubmission(sub: DaySubmission) {
+  const all = getSubmissions();
+  all[sub.day] = sub;
+  write(SUBMISSIONS_KEY, all);
 }
 
 /**

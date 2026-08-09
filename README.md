@@ -10,6 +10,27 @@ day, a persistent memory layer, and a skill path that shows real progress.
 
 [https://abtalks-redesign-fawn.vercel.app](https://abtalks-redesign-fawn.vercel.app)
 
+## Route map
+
+Screens are mobile-first (designed at 390px):
+
+```
+/
+/dashboard
+/day/12
+```
+
+- `/` — Landing page for a student who has never heard of ABTalks
+- `/dashboard` — Student dashboard (streak, today's task, progress, completion, standing)
+- `/day/12` — A full challenge day: read the task, understand what to build,
+  submit proof of work (GitHub commit + LinkedIn post)
+
+## Edge cases handled
+
+- First day with no streak (streak 0, "Welcome to ABTalks")
+- Missed days (calendar status + catch-up banner + catch-up plan)
+- Empty profile (graceful defaults instead of a crash)
+
 ## What changed
 
 - **One task, full focus** — a single daily card (Day 60: "Ship v1.0.0 and

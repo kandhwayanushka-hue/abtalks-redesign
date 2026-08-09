@@ -1,6 +1,8 @@
 import Link from "next/link";
+import { MobileNav } from "@/components/day/ChallengeDay";
 import {
   ArrowRight,
+  Bolt,
   Brain,
   Calendar,
   CheckCircle,
@@ -156,6 +158,48 @@ export default function Home() {
               <div key={label} className="bg-zinc-950 px-6 py-6 text-center">
                 <div className="text-3xl font-semibold tracking-tight text-gradient">{num}</div>
                 <div className="mt-1 text-sm text-zinc-500">{label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-t border-white/5">
+        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+          <div className="text-center">
+            <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
+              How it works — 3 steps to your first streak
+            </h2>
+            <p className="mx-auto mt-3 max-w-md text-zinc-400">
+              Built for your phone, late at night after college. Ten minutes a day, proof you can show.
+            </p>
+          </div>
+          <div className="mt-10 grid gap-4 sm:grid-cols-3">
+            {[
+              {
+                icon: Bolt,
+                step: "01",
+                title: "Pick a track",
+                body: "Choose a 60-day challenge — prompting, agents, deployment, portfolio. One track, one skill at a time.",
+              },
+              {
+                icon: GitBranch,
+                step: "02",
+                title: "Build & submit daily",
+                body: "Every day, build something small. Push a GitHub commit and post on LinkedIn — that’s your proof of work.",
+              },
+              {
+                icon: Rocket,
+                step: "03",
+                title: "Streak grows, you get noticed",
+                body: "Consistency compounds. Miss a day? Catch up instead of quitting. Recruiters see your public streak.",
+              },
+            ].map((s) => (
+              <div key={s.step} className="relative rounded-2xl border border-white/10 bg-white/[0.03] p-6">
+                <span className="absolute right-5 top-5 text-3xl font-semibold text-white/5">{s.step}</span>
+                <s.icon className="h-6 w-6 text-violet-400" />
+                <h3 className="mt-4 font-semibold tracking-tight">{s.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-zinc-400">{s.body}</p>
               </div>
             ))}
           </div>
@@ -364,7 +408,7 @@ export default function Home() {
         </div>
       </section>
 
-      <footer className="border-t border-white/5 py-10">
+      <footer className="border-t border-white/5 py-10 pb-28 md:pb-10">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-4 text-sm text-zinc-500 sm:flex-row sm:px-6">
           <span>ABTalks · Redesigned — a hackathon rebuild, vibe-coded.</span>
           <span className="flex items-center gap-2">
@@ -373,6 +417,8 @@ export default function Home() {
           </span>
         </div>
       </footer>
+
+      <MobileNav active="home" />
     </div>
   );
 }

@@ -9,8 +9,41 @@ export interface VisualStep {
   body: string;
 }
 
+export interface BuildPlan {
+  deliverable: string;
+  checklist: string[];
+  example: string;
+}
+
 function skillLabel(day: DayNode): string {
   return SKILLS.find((s) => s.id === day.skill)?.label ?? day.skill;
+}
+
+export function dayBuild(day: DayNode): BuildPlan {
+  const label = skillLabel(day);
+  const deliverables: Record<string, string> = {
+    prompting: "A prompt you wrote, iterated on, and saved — with the before/after.",
+    tools: "A working tool-assisted build you ran yourself, end to end.",
+    agents: "A small agent (or agent flow) that did one real task without you.",
+    systems: "A running app or system with data flowing in and out.",
+    deployment: "Something deployed and publicly reachable — a URL you can share.",
+    portfolio: "Proof of learning you can show a recruiter: project, post, or case study.",
+  };
+  const checklist = [
+    `Spend ~${day.minutes} focused minutes on this ${label.toLowerCase()} task`,
+    "Build the thing by hand — or steer AI to build it, and understand every line",
+    "Push a GitHub commit (repo URL, today)",
+    "Publish a LinkedIn post (today) — proof of work + visibility",
+    "Get one piece of feedback and note it for tomorrow",
+  ];
+  return {
+    deliverable: deliverables[day.skill] ?? "A finished, shippable piece of work you can show.",
+    checklist,
+    example:
+      day.day === 12
+        ? "Example: add an MCP server to a Claude Code session so your agent can read a file or hit an API it couldn't before. Screenshot it, commit it, post it."
+        : `Example day: read today's objective, try it for ${day.minutes} minutes, commit the output to GitHub, and post a 3-line LinkedIn update with a screenshot. That's the whole habit — today's is "${day.title}".`,
+  };
 }
 
 export function visualSteps(day: DayNode): VisualStep[] {

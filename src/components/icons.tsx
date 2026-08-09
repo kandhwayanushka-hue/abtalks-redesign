@@ -95,6 +95,12 @@ export const ArrowRight = (p: SVGProps<SVGSVGElement>) => (
   </svg>
 );
 
+export const ArrowLeft = (p: SVGProps<SVGSVGElement>) => (
+  <svg {...base(p)}>
+    <path d="M19 12H5M12 19l-7-7 7-7" />
+  </svg>
+);
+
 export const Send = (p: SVGProps<SVGSVGElement>) => (
   <svg {...base(p)}>
     <path d="m22 2-7 20-4-9-9-4 20-7z" />

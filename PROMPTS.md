@@ -119,7 +119,39 @@ to the real learner state.
   Journey) to open a live chat with them. Online/away indicators, typing
   dots, and doubts are logged to memory and resolved in-context.
 
-## 9. Deployment
+## 9. Challenge Day screen + mobile-first + route map
+
+**Prompt:**
+> This is the real problem statement. Ship at minimum: a Landing page, a
+> Student Dashboard, and a Challenge Day (/day/12) with proof-of-work
+> submission (GitHub commit + LinkedIn post). Include a route map. Be
+> mobile-first at 390px, handle first-day/missed-day/empty-profile edge
+> cases, and add at least one thoughtful idea. If anything is missing, do
+> it.
+
+**Result:**
+- `src/app/day/[day]/page.tsx` + `src/components/day/ChallengeDay.tsx` — a
+  full Challenge Day screen: read the task (Read/Visual/Listen), "What
+  you'll build" plan (`dayBuild()`), and a **Submit proof of work** form
+  (GitHub URL, LinkedIn URL, reflection) that persists to memory and flips
+  the day's status to On time. Handles Today / Missed · catch up / Future /
+  already-submitted states.
+- **Mobile-first:** a fixed bottom navigation bar (Home / Dashboard / Today)
+  visible at 390px, hamburger-free, with content padding so nothing is
+  hidden behind it.
+- **Edge cases:** first day with no streak, missed-day catch-up banner,
+  empty profile (graceful "Welcome to ABTalks" defaults).
+- **Thoughtful idea:** the memory layer + catch-up plan — the platform
+  turns a wall of "Missed" days into a guided 13-step comeback instead of
+  quitting.
+- **Route map added to README:**
+  ```
+  /
+  /dashboard
+  /day/12
+  ```
+
+## 10. Deployment
 
 **Prompt:**
 > Deploy to Vercel and make sure the live URL is reachable.
