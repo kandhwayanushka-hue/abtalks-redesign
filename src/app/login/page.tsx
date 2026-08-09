@@ -1,10 +1,39 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Flame, Sparkles } from "@/components/icons";
 import { setUser } from "@/lib/auth";
+
+declare global {
+  interface Window {
+    google?: {
+      accounts: {
+        id: {
+          initialize: (config: {
+            client_id: string;
+            callback: (res: { credential: string }) => void;
+          }) => void;
+          renderButton: (el: HTMLElement, opts: { theme?: string; size?: string; width?: number }) => void;
+        };
+      };
+    };
+  }
+}
+
+const GOOGLE_CLIENT_ID = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || "";
+
+function decodeJwt(token: string) {
+  const payload = token.split(".")[1];
+  const normalized = payload.replace(/-/g, "+").replace(/_/g, "/");
+  const padded = normalized + "=".repeat((4 - (normalized.length % 4)) % 4);
+  return JSON.parse(decodeURIComponent(escape(window.atob(padded)))) as {
+    name?: string;
+    email?: string;
+    picture?: string;
+  };
+}
 
 function GoogleG(props: React.SVGProps<SVGSVGElement>) {
   return (
@@ -33,6 +62,7 @@ const TRACKS = ["Claude Challenge", "Agents", "Deployment", "Portfolio"];
 
 export default function LoginPage() {
   const router = useRouter();
+  const googleBtn = useRef<HTMLDivElement>(null);
   const [loading, setLoading] = useState(false);
   const [account, setAccount] = useState<null | { name: string; email: string }>(null);
 
@@ -46,6 +76,42 @@ export default function LoginPage() {
       window.setTimeout(() => router.push("/dashboard"), 500);
     }, 700);
   }
+
+  useEffect(() => {
+    if (!GOOGLE_CLIENT_ID) return;
+    let cancelled = false;
+    function render() {
+      if (cancelled || !googleBtn.current || !window.google) return;
+      window.google.accounts.id.initialize({
+        client_id: GOOGLE_CLIENT_ID,
+        callback: (res) => {
+          const info = decodeJwt(res.credential);
+          const user = {
+            name: info.name ?? "Google user",
+            email: info.email ?? "",
+            joinedAt: new Date().toISOString(),
+            provider: "google" as const,
+          };
+          setUser(user);
+          setAccount(user);
+          router.push("/dashboard");
+        },
+      });
+      window.google.accounts.id.renderButton(googleBtn.current, {
+        theme: "outline",
+        size: "large",
+        width: googleBtn.current.clientWidth,
+      });
+    }
+    const s = document.createElement("script");
+    s.src = "https://accounts.google.com/gsi/client";
+    s.async = true;
+    s.onload = render;
+    document.head.appendChild(s);
+    return () => {
+      cancelled = true;
+    };
+  }, [router]);
 
   return (
     <div className="flex min-h-screen flex-col bg-zinc-950 text-zinc-100">
@@ -75,6 +141,17 @@ export default function LoginPage() {
                   <Sparkles className="h-3.5 w-3.5" />
                   Signed in — opening your challenge…
                 </p>
+              </div>
+            ) : GOOGLE_CLIENT_ID ? (
+              <div>
+                <div ref={googleBtn} className="flex justify-center" />
+                <button
+                  onClick={signIn}
+                  className="mt-4 flex w-full items-center justify-center gap-3 rounded-full border border-white/10 bg-white/5 px-5 py-3.5 text-sm font-semibold text-zinc-300 transition hover:bg-white/10"
+                >
+                  <GoogleG className="h-5 w-5" />
+                  Demo sign-in (mock)
+                </button>
               </div>
             ) : (
               <button
@@ -110,7 +187,9 @@ export default function LoginPage() {
           </div>
 
           <p className="mt-6 text-center text-xs leading-relaxed text-zinc-600">
-            Mock sign-in for the demo — auth is out of scope for this build.
+            {GOOGLE_CLIENT_ID
+              ? "Signed in with Google — your session is stored locally for this demo."
+              : "Real Google sign-in is wired and activates once a Google Client ID is added — until then this is the demo mock."}
             <br />
             By continuing you agree to ship something public every day.
           </p>
