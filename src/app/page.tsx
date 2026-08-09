@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { MobileNav } from "@/components/day/ChallengeDay";
 import ThemeToggle from "@/components/ThemeToggle";
+import TiltCard from "@/components/TiltCard";
 import { CERTIFICATES } from "@/data/certificates";
 import {
   ArrowRight,
@@ -195,6 +196,32 @@ export default function Home() {
             style={{ animationDelay: "-3s" }}
           />
         </div>
+        <div className="pointer-events-none absolute inset-0 hidden lg:block">
+          <div className="float-3d preserve-3d absolute left-[5%] top-[26%] rounded-xl border border-white/10 bg-zinc-900/80 px-4 py-3 backdrop-blur" style={{ animationDelay: "0s" }}>
+            <div className="flex items-center gap-2 text-sm">
+              <Flame className="h-4 w-4 text-amber-400 [transform:translateZ(30px)]" />
+              <span className="[transform:translateZ(20px)]">Streak 7 · longest 13</span>
+            </div>
+          </div>
+          <div
+            className="float-3d preserve-3d absolute right-[4%] top-[38%] rounded-xl border border-white/10 bg-zinc-900/80 px-4 py-3 backdrop-blur"
+            style={{ animationDelay: "-2s" }}
+          >
+            <div className="flex items-center gap-2 text-sm">
+              <Trophy className="h-4 w-4 text-amber-300 [transform:translateZ(30px)]" />
+              <span className="[transform:translateZ(20px)]">Certificate · Part 1 unlocked</span>
+            </div>
+          </div>
+          <div
+            className="float-3d preserve-3d absolute left-[10%] top-[64%] rounded-xl border border-white/10 bg-zinc-900/80 px-4 py-3 backdrop-blur"
+            style={{ animationDelay: "-4s" }}
+          >
+            <div className="flex items-center gap-2 text-sm">
+              <Rocket className="h-4 w-4 text-emerald-400 [transform:translateZ(30px)]" />
+              <span className="[transform:translateZ(20px)]">v1.0.0 shipped</span>
+            </div>
+          </div>
+        </div>
         <div className="relative mx-auto max-w-6xl px-4 pb-16 pt-24 sm:px-6 sm:pt-32">
           <div className="mx-auto max-w-3xl text-center">
             <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs font-medium text-zinc-300">
@@ -275,12 +302,15 @@ export default function Home() {
                 body: "Consistency compounds. Miss a day? Catch up instead of quitting. Recruiters see your public streak.",
               },
             ].map((s) => (
-              <div key={s.step} className="relative rounded-2xl border border-white/10 bg-white/[0.03] p-6">
+              <TiltCard
+                key={s.step}
+                className="relative rounded-2xl border border-white/10 bg-white/[0.03] p-6"
+              >
                 <span className="absolute right-5 top-5 text-3xl font-semibold text-white/5">{s.step}</span>
-                <s.icon className="h-6 w-6 text-violet-400" />
-                <h3 className="mt-4 font-semibold tracking-tight">{s.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-zinc-400">{s.body}</p>
-              </div>
+                <s.icon className="h-6 w-6 text-violet-400 [transform:translateZ(24px)]" />
+                <h3 className="mt-4 font-semibold tracking-tight [transform:translateZ(16px)]">{s.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-zinc-400 [transform:translateZ(12px)]">{s.body}</p>
+              </TiltCard>
             ))}
           </div>
         </div>
@@ -304,7 +334,7 @@ export default function Home() {
           </div>
           <div className="mt-8 grid gap-4 lg:grid-cols-3">
             {CERTIFICATES.map((c) => (
-              <div
+              <TiltCard
                 key={c.part}
                 className="flex flex-col rounded-2xl border border-white/10 bg-white/[0.03] p-6"
               >
@@ -321,7 +351,7 @@ export default function Home() {
                     ))}
                   </span>
                 </div>
-                <h3 className="mt-3 text-lg font-semibold tracking-tight">{c.title}</h3>
+                <h3 className="mt-3 text-lg font-semibold tracking-tight [transform:translateZ(16px)]">{c.title}</h3>
                 <div className="mt-1 text-sm text-zinc-500">
                   Days {c.start}–{c.end} ·{" "}
                   <span className="text-zinc-300">{c.difficulty} difficulty</span>
@@ -343,7 +373,7 @@ export default function Home() {
                     Certificate of Achievement · Day {c.day}
                   </Link>
                 </div>
-              </div>
+              </TiltCard>
             ))}
           </div>
         </div>
@@ -366,12 +396,12 @@ export default function Home() {
           </div>
           <div className="mt-8 grid gap-4 sm:grid-cols-3">
             {rules.map((r) => (
-              <div key={r.num} className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] p-6">
+              <TiltCard key={r.num} className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] p-6">
                 <span className="absolute -right-3 -top-5 text-7xl font-bold text-white/5">{r.num}</span>
                 <span className="text-xs font-semibold text-violet-400">Rule {r.num}</span>
-                <h3 className="mt-2 text-lg font-semibold tracking-tight">{r.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-zinc-400">{r.body}</p>
-              </div>
+                <h3 className="mt-2 text-lg font-semibold tracking-tight [transform:translateZ(16px)]">{r.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-zinc-400 [transform:translateZ(12px)]">{r.body}</p>
+              </TiltCard>
             ))}
           </div>
         </div>
@@ -495,14 +525,14 @@ export default function Home() {
           </div>
           <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {features.map((f) => (
-              <div
+              <TiltCard
                 key={f.title}
-                className="group rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition hover:border-violet-500/30 hover:bg-white/[0.05]"
+                className="rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition hover:border-violet-500/30 hover:bg-white/[0.05]"
               >
-                <f.icon className="h-6 w-6 text-violet-400 transition group-hover:scale-110" />
-                <h3 className="mt-4 text-lg font-semibold tracking-tight">{f.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-zinc-400">{f.body}</p>
-              </div>
+                <f.icon className="h-6 w-6 text-violet-400 transition group-hover:scale-110 [transform:translateZ(24px)]" />
+                <h3 className="mt-4 text-lg font-semibold tracking-tight [transform:translateZ(16px)]">{f.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-zinc-400 [transform:translateZ(12px)]">{f.body}</p>
+              </TiltCard>
             ))}
           </div>
         </div>
