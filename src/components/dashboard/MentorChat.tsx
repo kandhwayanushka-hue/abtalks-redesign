@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import { Brain, Send, Sparkles } from "@/components/icons";
 import { getHistory, getProfile, pushMessage, type MentorMessage } from "@/lib/memory";
 import { mentorReply } from "@/lib/mentor";
@@ -8,7 +9,7 @@ import type { Mentor } from "@/lib/mentors";
 
 const SUGGESTIONS = ["Give me a hint for today", "Review my submission", "Where am I?"];
 
-export default function MentorChat({ mentor }: { mentor?: Mentor }) {
+export default function MentorChat({ mentor, fullScreen }: { mentor?: Mentor; fullScreen?: boolean }) {
   const [history, setHistory] = useState<MentorMessage[]>(() => getHistory());
   const [input, setInput] = useState("");
   const [thinking, setThinking] = useState(false);
@@ -90,12 +91,22 @@ export default function MentorChat({ mentor }: { mentor?: Mentor }) {
             </div>
           </div>
         </div>
-        <button
-          onClick={quickReview}
-          className="rounded-full border border-violet-500/30 bg-violet-500/10 px-3 py-1.5 text-xs font-medium text-violet-300 transition hover:bg-violet-500/20"
-        >
-          Quick review
-        </button>
+        <div className="flex items-center gap-2">
+          {!fullScreen && (
+            <Link
+              href="/chat"
+              className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-medium text-zinc-300 transition hover:border-violet-500/30 hover:text-white"
+            >
+              Full screen ↗
+            </Link>
+          )}
+          <button
+            onClick={quickReview}
+            className="rounded-full border border-violet-500/30 bg-violet-500/10 px-3 py-1.5 text-xs font-medium text-violet-300 transition hover:bg-violet-500/20"
+          >
+            Quick review
+          </button>
+        </div>
       </div>
 
       <div className="scrollbar-thin flex-1 space-y-4 overflow-y-auto px-5 py-5">

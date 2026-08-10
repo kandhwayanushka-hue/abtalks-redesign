@@ -7,14 +7,14 @@ import { visualSteps } from "@/lib/visual";
 import { isSpeechSupported, speak, stopSpeaking } from "@/lib/speech";
 import { ArrowRight, Eye, Pause, Volume2 } from "@/components/icons";
 
-function speakText(node: DayNode) {
+function speakText(node: DayNode, onEnd?: () => void) {
   const steps = visualSteps(node);
   const text = [
     `Day ${node.day}. ${node.title}.`,
     node.blurb,
     ...steps.map((s, i) => `Step ${i + 1}: ${s.title}. ${s.body}`),
   ].join(" ");
-  speak(text);
+  speak(text, onEnd);
 }
 
 export default function TaskView({ node }: { node: DayNode }) {
@@ -29,8 +29,7 @@ export default function TaskView({ node }: { node: DayNode }) {
       setListening(false);
     } else {
       setListening(true);
-      speakText(node);
-      if (supported) window.setTimeout(() => setListening(false), 1000);
+      speakText(node, () => setListening(false));
     }
   }
 
