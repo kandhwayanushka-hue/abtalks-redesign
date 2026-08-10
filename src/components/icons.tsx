@@ -205,3 +205,9 @@ export const Gift = (p: SVGProps<SVGSVGElement>) => (
     <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7M12 8v13M12 8s-1-5-4.5-5C5.6 3 5 4 5 5.5 5 7 7 8 12 8zm0 0s1-5 4.5-5c1.9 0 2.5 1 2.5 2.5C19 7 17 8 12 8z" />
   </svg>
 );
+
+export const Star = (p: SVGProps<SVGSVGElement>) => (
+  <svg {...base(p)}>
+    <path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.9-5.2-2.8-5.2 2.8 1-5.9L3.5 9.7l5.9-.9L12 3.5z" />
+  </svg>
+);

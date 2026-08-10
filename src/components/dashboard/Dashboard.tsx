@@ -32,6 +32,7 @@ import {
   RECENT_SUBMISSIONS,
   REFERRAL_CODE,
 } from "@/data/journey";
+import { COMMUNITY_POSTS } from "@/data/community";
 
 const navItems = [
   { label: "Today", href: "#today", active: true },
@@ -42,13 +43,6 @@ const navItems = [
   { label: "Content", href: "/content" },
   { label: "Certificates", href: "/certificates" },
   { label: "Profile", href: "/profile" },
-];
-
-const posts = [
-  { author: "Priya R.", day: 57, tag: "refactor", title: "I made my repo my resume", votes: 84 },
-  { author: "Arjun K.", day: 59, tag: "case-study", title: "Breaking down my launch numbers", votes: 71 },
-  { author: "Sneha T.", day: 55, tag: "teach", title: "Teaching my friend Day 2 — it stuck", votes: 63 },
-  { author: "Dev M.", day: 58, tag: "polish", title: "The 90-minute polish pass that worked", votes: 58 },
 ];
 
 function askMentor(text: string) {
@@ -422,9 +416,10 @@ export default function Dashboard() {
             </Link>
           </div>
           <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            {posts.map((p) => (
-              <button
-                key={p.title}
+            {COMMUNITY_POSTS.map((p) => (
+              <Link
+                key={p.id}
+                href={`/community/${p.id}`}
                 className="group rounded-2xl border border-white/10 bg-white/[0.03] p-5 text-left transition hover:border-violet-500/30 hover:bg-white/[0.05]"
               >
                 <div className="flex items-center justify-between">
@@ -441,7 +436,7 @@ export default function Dashboard() {
                     {p.votes}
                   </span>
                 </div>
-              </button>
+              </Link>
             ))}
           </div>
         </section>
