@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
 import { Brain, Send, Sparkles } from "@/components/icons";
 import { getHistory, getProfile, pushMessage, type MentorMessage } from "@/lib/memory";
 import { mentorReply } from "@/lib/mentor";
@@ -93,12 +92,14 @@ export default function MentorChat({ mentor, fullScreen }: { mentor?: Mentor; fu
         </div>
         <div className="flex items-center gap-2">
           {!fullScreen && (
-            <Link
+            <a
               href="/chat"
+              target="_blank"
+              rel="noopener noreferrer"
               className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-medium text-zinc-300 transition hover:border-violet-500/30 hover:text-white"
             >
               Full screen ↗
-            </Link>
+            </a>
           )}
           <button
             onClick={quickReview}

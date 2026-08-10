@@ -23,14 +23,14 @@ export default function TaskView({ node }: { node: DayNode }) {
   const supported = isSpeechSupported();
   const steps = visualSteps(node);
 
-  function toggleListen() {
-    if (listening) {
-      stopSpeaking();
-      setListening(false);
-    } else {
-      setListening(true);
-      speakText(node, () => setListening(false));
-    }
+  function startListen() {
+    setListening(true);
+    speakText(node, () => setListening(false));
+  }
+
+  function stopListen() {
+    stopSpeaking();
+    setListening(false);
   }
 
   return (
@@ -57,22 +57,25 @@ export default function TaskView({ node }: { node: DayNode }) {
         </div>
 
         {supported && (
-          <button
-            onClick={toggleListen}
-            className="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-semibold text-zinc-200 transition hover:bg-white/10"
-          >
-            {listening ? (
-              <>
-                <Pause className="h-3.5 w-3.5 text-violet-400" />
-                Stop narration
-              </>
-            ) : (
-              <>
-                <Volume2 className="h-3.5 w-3.5 text-violet-400" />
-                Listen to this task
-              </>
+          <div className="flex items-center gap-2">
+            {listening && (
+              <button
+                onClick={stopListen}
+                className="flex items-center gap-2 rounded-full border border-red-500/30 bg-red-500/10 px-4 py-2 text-xs font-semibold text-red-300 transition hover:bg-red-500/20"
+              >
+                <Pause className="h-3.5 w-3.5" />
+                Stop
+              </button>
             )}
-          </button>
+            <button
+              onClick={startListen}
+              disabled={listening}
+              className="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-semibold text-zinc-200 transition hover:bg-white/10 disabled:opacity-50"
+            >
+              <Volume2 className="h-3.5 w-3.5 text-violet-400" />
+              Listen to this task
+            </button>
+          </div>
         )}
       </div>
 
