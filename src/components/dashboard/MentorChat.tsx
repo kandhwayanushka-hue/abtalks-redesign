@@ -12,7 +12,8 @@ export default function MentorChat({ mentor, fullScreen }: { mentor?: Mentor; fu
   const [history, setHistory] = useState<MentorMessage[]>(() => getHistory());
   const [input, setInput] = useState("");
   const [thinking, setThinking] = useState(false);
-  const bottomRef = useRef<HTMLDivElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const openedFullScreen = useRef(false);
 
   const sendRef = useRef<(text: string) => void>(() => {});
 
@@ -29,13 +30,20 @@ export default function MentorChat({ mentor, fullScreen }: { mentor?: Mentor; fu
     return () => window.removeEventListener("abtalks:mentor-ask", handler);
   }, []);
 
+  // Scroll only the chat's own message list (not the whole page) so opening a
+  // page with the mentor embedded never yanks the window to the bottom.
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+    const el = scrollRef.current;
+    if (el) el.scrollTop = el.scrollHeight;
   }, [history, thinking]);
 
   function send(text: string) {
     const trimmed = text.trim();
     if (!trimmed || thinking) return;
+    if (!fullScreen && !openedFullScreen.current) {
+      openedFullScreen.current = true;
+      window.open("/chat", "_blank", "noopener");
+    }
     const userMsg: MentorMessage = { role: "user", content: trimmed, ts: Date.now() };
     const next = [...history, userMsg];
     setHistory(next);
@@ -110,7 +118,7 @@ export default function MentorChat({ mentor, fullScreen }: { mentor?: Mentor; fu
         </div>
       </div>
 
-      <div className="scrollbar-thin flex-1 space-y-4 overflow-y-auto px-5 py-5">
+      <div className="scrollbar-thin flex-1 space-y-4 overflow-y-auto px-5 py-5" ref={scrollRef}>
         {history.map((m, i) => (
           <div key={i} className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}>
             <div
@@ -133,7 +141,6 @@ export default function MentorChat({ mentor, fullScreen }: { mentor?: Mentor; fu
             </div>
           </div>
         )}
-        <div ref={bottomRef} />
       </div>
 
       <div className="flex flex-wrap gap-2 border-t border-white/5 px-5 py-3">

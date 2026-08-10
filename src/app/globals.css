@@ -449,6 +449,63 @@ body {
   color: #a1a1aa !important;
 }
 
+/* `text-white` is used on both light cards and colored/gradient surfaces. In
+   light mode white-on-white is unreadable, so darken it — except where the
+   surface itself is a gradient, a colored chip, or a dark overlay (those keep
+   white text). Only self + direct-child are matched to avoid darkening text
+   nested deep under a page-level gradient. */
+.light .text-white {
+  color: #18181b !important;
+}
+.light .text-white\/5 {
+  color: rgba(24, 24, 27, 0.55) !important;
+}
+.light .footer-dark .text-white,
+.light .footer-dark .text-white\/5 {
+  color: #ffffff !important;
+}
+.light .text-white[style*="linear-gradient"],
+.light .text-white[style*="radial-gradient"],
+.light .text-white[style*="conic-gradient"],
+.light [class*="gradient"].text-white,
+.light [class*="gradient"] > .text-white,
+.light [class*="bg-violet-"].text-white,
+.light [class*="bg-violet-"] > .text-white,
+.light [class*="bg-blue-"].text-white,
+.light [class*="bg-blue-"] > .text-white,
+.light [class*="bg-emerald-"].text-white,
+.light [class*="bg-emerald-"] > .text-white,
+.light [class*="bg-green-"].text-white,
+.light [class*="bg-green-"] > .text-white,
+.light [class*="bg-red-"].text-white,
+.light [class*="bg-red-"] > .text-white,
+.light [class*="bg-amber-"].text-white,
+.light [class*="bg-amber-"] > .text-white,
+.light [class*="bg-orange-"].text-white,
+.light [class*="bg-orange-"] > .text-white,
+.light [class*="bg-pink-"].text-white,
+.light [class*="bg-pink-"] > .text-white,
+.light [class*="bg-fuchsia-"].text-white,
+.light [class*="bg-fuchsia-"] > .text-white,
+.light [class*="bg-purple-"].text-white,
+.light [class*="bg-purple-"] > .text-white,
+.light [class*="bg-indigo-"].text-white,
+.light [class*="bg-indigo-"] > .text-white,
+.light [class*="bg-teal-"].text-white,
+.light [class*="bg-teal-"] > .text-white,
+.light [class*="bg-cyan-"].text-white,
+.light [class*="bg-cyan-"] > .text-white,
+.light [class*="bg-sky-"].text-white,
+.light [class*="bg-sky-"] > .text-white,
+.light [class*="bg-zinc-800"].text-white,
+.light [class*="bg-zinc-800"] > .text-white,
+.light [class*="bg-zinc-700"].text-white,
+.light [class*="bg-zinc-700"] > .text-white,
+.light [class*="bg-black"].text-white,
+.light [class*="bg-black"] > .text-white {
+  color: #ffffff !important;
+}
+
 .light .placeholder\:text-zinc-600::placeholder {
   color: #a1a1aa !important;
 }
