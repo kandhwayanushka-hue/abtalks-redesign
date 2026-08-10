@@ -151,7 +151,17 @@ export const Lock = (p: SVGProps<SVGSVGElement>) => (
 
 export const Play = (p: SVGProps<SVGSVGElement>) => (
   <svg {...base(p)}>
-    <polygon points="6 3 20 12 6 21 6 3" fill="currentColor" stroke="none" />
+    <polygon points="6 3 20 12 6 21 6 3" />
+  </svg>
+);
+
+export const Trash2 = (p: SVGProps<SVGSVGElement>) => (
+  <svg {...base(p)}>
+    <path d="M3 6h18" />
+    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" />
+    <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+    <line x1="10" y1="11" x2="10" y2="17" />
+    <line x1="14" y1="11" x2="14" y2="17" />
   </svg>
 );
 

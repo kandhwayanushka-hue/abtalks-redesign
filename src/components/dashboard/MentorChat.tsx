@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Brain, Send, Sparkles } from "@/components/icons";
-import { getHistory, getProfile, pushMessage, type MentorMessage } from "@/lib/memory";
+import { Brain, Send, Sparkles, Trash2 } from "@/components/icons";
+import { clearHistory, getHistory, getProfile, pushMessage, type MentorMessage } from "@/lib/memory";
 import { mentorReply } from "@/lib/mentor";
 import type { Mentor } from "@/lib/mentors";
 
@@ -117,6 +117,18 @@ export default function MentorChat({ mentor, fullScreen }: { mentor?: Mentor; fu
               Full screen ↗
             </a>
           )}
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              clearHistory();
+              setHistory([]);
+            }}
+            title="Delete chat history"
+            aria-label="Delete chat history"
+            className="flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-white/5 text-zinc-400 transition hover:border-red-500/40 hover:text-red-400"
+          >
+            <Trash2 className="h-3.5 w-3.5" />
+          </button>
           <button
             onClick={quickReview}
             className="rounded-full border border-violet-500/30 bg-violet-500/10 px-3 py-1.5 text-xs font-medium text-violet-300 transition hover:bg-violet-500/20"

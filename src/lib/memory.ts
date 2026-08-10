@@ -112,6 +112,10 @@ export function pushMessage(msg: MentorMessage) {
   write(HISTORY_KEY, next);
 }
 
+export function clearHistory() {
+  write(HISTORY_KEY, []);
+}
+
 export function getMemory(): MemoryEntry[] {
   return read<MemoryEntry[]>(MEMORY_KEY, []);
 }
