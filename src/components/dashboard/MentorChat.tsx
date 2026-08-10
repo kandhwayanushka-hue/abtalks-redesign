@@ -16,15 +16,19 @@ export default function MentorChat({ mentor, fullScreen }: { mentor?: Mentor; fu
   const openedFullScreen = useRef(false);
 
   const sendRef = useRef<(text: string) => void>(() => {});
+  const openFullScreenRef = useRef<() => void>(() => {});
 
   useEffect(() => {
     sendRef.current = send;
+    openFullScreenRef.current = openFullScreen;
   });
 
   useEffect(() => {
     const handler = (e: Event) => {
       const detail = (e as CustomEvent<string>).detail;
-      if (detail) sendRef.current(detail);
+      if (!detail) return;
+      openFullScreenRef.current();
+      sendRef.current(detail);
     };
     window.addEventListener("abtalks:mentor-ask", handler);
     return () => window.removeEventListener("abtalks:mentor-ask", handler);
