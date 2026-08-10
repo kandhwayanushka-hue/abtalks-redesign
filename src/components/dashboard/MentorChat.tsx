@@ -37,13 +37,15 @@ export default function MentorChat({ mentor, fullScreen }: { mentor?: Mentor; fu
     if (el) el.scrollTop = el.scrollHeight;
   }, [history, thinking]);
 
+  function openFullScreen() {
+    if (fullScreen || openedFullScreen.current) return;
+    openedFullScreen.current = true;
+    window.open("/chat", "_blank", "noopener");
+  }
+
   function send(text: string) {
     const trimmed = text.trim();
     if (!trimmed || thinking) return;
-    if (!fullScreen && !openedFullScreen.current) {
-      openedFullScreen.current = true;
-      window.open("/chat", "_blank", "noopener");
-    }
     const userMsg: MentorMessage = { role: "user", content: trimmed, ts: Date.now() };
     const next = [...history, userMsg];
     setHistory(next);
@@ -71,7 +73,13 @@ export default function MentorChat({ mentor, fullScreen }: { mentor?: Mentor; fu
   }
 
   return (
-    <div className="flex h-full flex-col overflow-hidden rounded-2xl border border-white/10 bg-zinc-900/70">
+    <div
+      className="flex h-full flex-col overflow-hidden rounded-2xl border border-white/10 bg-zinc-900/70"
+      onClick={(e) => {
+        if ((e.target as HTMLElement).closest("a")) return;
+        openFullScreen();
+      }}
+    >
       <div className="flex items-center justify-between border-b border-white/5 px-5 py-4">
         <div className="flex items-center gap-3">
           <span
