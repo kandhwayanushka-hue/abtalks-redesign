@@ -166,7 +166,7 @@ const footerCols = [
       ["Why this exists", "#why"],
       ["Features", "#features"],
       ["Memory layer", "#memory"],
-      ["Become an ambassador", "#ambassador"],
+      ["Become an ambassador", "/ambassador"],
     ],
   },
 ];
