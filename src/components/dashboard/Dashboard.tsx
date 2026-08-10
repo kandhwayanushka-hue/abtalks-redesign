@@ -210,9 +210,12 @@ export default function Dashboard() {
               </p>
             </div>
           </div>
-          <button className="shrink-0 rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-zinc-950 transition hover:bg-zinc-200">
+          <Link
+            href="/ambassador"
+            className="shrink-0 rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-zinc-950 transition hover:bg-zinc-200"
+          >
             Become an ambassador
-          </button>
+          </Link>
         </div>
 
         <section className="mt-6">
@@ -376,9 +379,10 @@ export default function Dashboard() {
               <p className="text-sm text-zinc-500">Every submission, logged to memory.</p>
               <div className="mt-4 space-y-2.5">
                 {RECENT_SUBMISSIONS.map((s) => (
-                  <div
+                  <Link
                     key={s.day}
-                    className="flex items-center justify-between rounded-xl border border-white/5 bg-white/[0.02] px-4 py-3"
+                    href={`/challenge/${s.day}`}
+                    className="flex items-center justify-between rounded-xl border border-white/5 bg-white/[0.02] px-4 py-3 transition hover:border-violet-500/30 hover:bg-white/[0.05]"
                   >
                     <div className="flex items-center gap-3">
                       <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-500/15">
@@ -394,7 +398,7 @@ export default function Dashboard() {
                     <span className="rounded-full bg-emerald-500/10 px-2.5 py-1 text-xs font-medium text-emerald-400">
                       {s.outcome}
                     </span>
-                  </div>
+                  </Link>
                 ))}
               </div>
             </section>
