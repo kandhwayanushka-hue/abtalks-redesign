@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useSyncExternalStore } from "react";
 import type { DayNode } from "@/data/journey";
 import { skillColor } from "@/data/journey";
 import { visualSteps } from "@/lib/visual";
@@ -20,7 +20,13 @@ function speakText(node: DayNode, onEnd?: () => void) {
 export default function TaskView({ node }: { node: DayNode }) {
   const [mode, setMode] = useState<"read" | "visual">("read");
   const [listening, setListening] = useState(false);
-  const supported = isSpeechSupported();
+  // Hydration-safe: server snapshot is false, client snapshot reflects the
+  // real environment, so the buttons render identically on first paint.
+  const supported = useSyncExternalStore(
+    () => () => {},
+    () => isSpeechSupported(),
+    () => false
+  );
   const steps = visualSteps(node);
 
   function startListen() {
